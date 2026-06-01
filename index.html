@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026년 상반기 사역결산 & 계획보고 — 사랑과평안의교회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brown: #6B3A1C;
+  --brown-light: #8B5E3C;
+  --brown-pale: #F5EDE7;
+  --green-org: #A0DD8D;
+  --gray-line: #E2E2E2;
+  --gray-sub: #888;
+  --text: #1A1A1A;
+  --bg: #F8F6F4;
+  --white: #FFFFFF;
+  --radius: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; }
+
+/* 헤더 */
+/* 진입화면 */
+.intro-screen { min-height: 100vh; background: var(--white); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 24px; position: relative; }
+.intro-church { font-size: 12px; color: var(--gray-sub); letter-spacing: 3px; margin-bottom: 36px; }
+.intro-year { font-size: 76px; font-weight: 700; color: var(--brown); line-height: 1; margin-bottom: 10px; font-family: Georgia, 'Times New Roman', serif; }
+.intro-title { font-size: 22px; font-weight: 700; color: var(--text); text-align: center; line-height: 1.5; margin-bottom: 6px; }
+.intro-sub { font-size: 14px; color: var(--gray-sub); margin-bottom: 36px; }
+.intro-divider { width: 40px; height: 1.5px; background: var(--brown); opacity: 0.4; margin-bottom: 36px; }
+.intro-btns { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 340px; }
+.intro-btn-primary { padding: 16px 24px; background: var(--brown); color: var(--white); border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; transition: background 0.15s; }
+.intro-btn-primary:hover { background: var(--brown-light); }
+.intro-btn-secondary { padding: 14px 24px; background: transparent; color: var(--brown); border: 1.5px solid var(--brown); border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; transition: background 0.15s; }
+.intro-btn-secondary:hover { background: var(--brown-pale); }
+.intro-footer { position: absolute; bottom: 24px; font-size: 11px; color: var(--gray-sub); opacity: 0.6; }
+/* PDF 모달 */
+.pdf-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 9999; padding: 20px; }
+.pdf-modal-inner { max-width: 900px; height: 90vh; margin: auto; background: #fff; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+.pdf-modal-head { padding: 12px 20px; background: var(--brown); color: var(--white); display: flex; justify-content: space-between; align-items: center; }
+.pdf-modal-head span { font-weight: 700; font-size: 14px; }
+.pdf-close { background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; line-height: 1; }
+.pdf-frame { flex: 1; border: none; }
+
+.site-header { background: var(--brown); padding: 20px 24px; }
+.site-header h1 { color: var(--white); font-size: 18px; font-weight: 700; }
+.site-header p { color: rgba(255,255,255,0.7); font-size: 12px; margin-top: 2px; }
+
+/* 컨테이너 */
+.container { max-width: 720px; margin: 0 auto; padding: 24px 16px 60px; }
+
+/* 카드 */
+.card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--gray-line); margin-bottom: 16px; overflow: hidden; }
+.card-head { background: var(--brown); padding: 12px 20px; color: var(--white); font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.card-head .badge { background: rgba(255,255,255,0.2); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; }
+.card-body { padding: 20px; }
+
+/* 폼 */
+.form-row { margin-bottom: 16px; }
+.form-row:last-child { margin-bottom: 0; }
+.form-row label { display: block; font-size: 12px; font-weight: 700; color: var(--gray-sub); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.form-row label span.req { color: #C0392B; margin-left: 2px; }
+.form-row label span.opt { color: #AAA; font-weight: 400; font-size: 11px; margin-left: 4px; }
+input[type=text], input[type=number], textarea, select {
+  width: 100%; padding: 10px 12px; border: 1.5px solid var(--gray-line); border-radius: 6px;
+  font-family: inherit; font-size: 14px; color: var(--text); background: var(--white);
+  transition: border-color 0.15s; outline: none; resize: vertical;
+}
+input:focus, textarea:focus, select:focus { border-color: var(--brown); }
+textarea { min-height: 80px; }
+select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M0 0l6 7 6-7z' fill='%23888'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+.form-hint { font-size: 11px; color: var(--gray-sub); margin-top: 6px; line-height: 1.5; }
+.form-hint code { background: var(--brown-pale); padding: 1px 4px; border-radius: 3px; font-family: monospace; font-size: 11px; color: var(--brown); }
+.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+/* 핵심사역 박스 */
+.plan-box { border: 1.5px solid var(--brown-pale); border-radius: 6px; padding: 16px; margin-bottom: 12px; background: #FDFBF9; }
+.plan-box-head { font-size: 12px; font-weight: 700; color: var(--brown); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--brown-pale); }
+
+/* 조직도 안내 박스 */
+.org-guide { background: var(--brown-pale); border-radius: 6px; padding: 14px; margin-bottom: 8px; }
+.org-guide strong { color: var(--brown); font-size: 12px; display: block; margin-bottom: 6px; }
+.org-guide p { font-size: 12px; color: #555; line-height: 1.7; }
+.org-guide .org-example { font-family: monospace; background: var(--white); border: 1px solid #DDD; border-radius: 4px; padding: 8px 12px; margin-top: 6px; font-size: 12px; color: var(--brown); }
+
+/* 제출 버튼 */
+.btn-generate { width: 100%; padding: 16px; background: var(--brown); color: var(--white); border: none; border-radius: var(--radius); font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-generate:hover { background: var(--brown-light); }
+.btn-generate:disabled { background: #CCC; cursor: not-allowed; }
+.btn-generate .icon { font-size: 20px; }
+
+/* 로딩 */
+.loading { display: none; text-align: center; padding: 20px; color: var(--brown); font-weight: 700; }
+.loading.show { display: block; }
+.spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid var(--brown-pale); border-top-color: var(--brown); border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 8px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 결과 */
+.result-box { display: none; background: #EAF7EE; border: 1.5px solid #4CAF50; border-radius: var(--radius); padding: 20px; text-align: center; margin-top: 16px; }
+.result-box.show { display: block; }
+.result-box .ok-icon { font-size: 32px; }
+.result-box p { margin-top: 8px; color: #2E7D32; font-weight: 700; }
+.result-box small { color: #555; font-size: 12px; }
+
+/* 오류 */
+.error-box { display: none; background: #FEECEC; border: 1.5px solid #E53935; border-radius: var(--radius); padding: 14px; margin-top: 8px; color: #B71C1C; font-size: 13px; }
+.error-box.show { display: block; }
+
+
+/* ── A. 스텝 인디케이터 ── */
+.step-bar { display:flex; background:var(--white); border-bottom:1px solid var(--gray-line); position:sticky; top:0; z-index:50; overflow-x:auto; scrollbar-width:none; }
+.step-bar::-webkit-scrollbar { display:none; }
+.step-item { flex:1; min-width:60px; padding:10px 4px; text-align:center; font-size:11px; font-weight:700; color:var(--gray-sub); cursor:pointer; border-bottom:3px solid transparent; white-space:nowrap; transition:all .2s; }
+.step-item.active { color:var(--brown); border-bottom-color:var(--brown); }
+.step-item .step-num { display:block; font-size:15px; margin-bottom:2px; }
+
+/* ── B. 핵심사역 아코디언 ── */
+.plan-box-head { cursor:pointer; display:flex; justify-content:space-between; align-items:center; user-select:none; }
+.plan-toggle-icon { font-size:18px; font-weight:400; color:var(--brown-light); transition:transform .25s; }
+.plan-box.collapsed .plan-toggle-icon { transform:rotate(0deg); }
+.plan-box.open .plan-toggle-icon { transform:rotate(45deg); }
+.plan-body { overflow:hidden; transition:max-height .3s ease, opacity .25s; }
+.plan-box.collapsed .plan-body { max-height:0 !important; opacity:0; }
+.plan-box.open .plan-body { opacity:1; }
+
+/* ── C. 하단 고정 버튼 ── */
+.btn-fixed-wrap { position:fixed; bottom:0; left:0; right:0; padding:12px 16px 16px; background:rgba(248,246,244,0.97); backdrop-filter:blur(6px); border-top:1px solid var(--gray-line); z-index:100; max-width:100%; }
+.btn-fixed-wrap .btn-generate { border-radius:14px; box-shadow:0 4px 16px rgba(107,58,28,0.25); }
+.container { padding-bottom:90px !important; }
+
+
+/* ── 슬라이드 미리보기 화면 ── */
+.preview-screen { display:none; min-height:100vh; background:var(--bg); padding-bottom:100px; }
+.preview-topbar { background:var(--brown); padding:14px 20px; display:flex; align-items:center; gap:12px; }
+.preview-topbar h2 { color:#fff; font-size:16px; font-weight:700; }
+.preview-topbar p { color:rgba(255,255,255,0.7); font-size:12px; }
+.preview-slides { padding:20px 16px; display:flex; flex-direction:column; gap:24px; }
+.slide-label { font-size:12px; font-weight:700; color:var(--brown); margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+.slide-label::before { content:''; display:inline-block; width:4px; height:14px; background:var(--brown); border-radius:2px; }
+.slide-wrap { width:100%; aspect-ratio:16/9; position:relative; overflow:hidden; background:#fff; box-shadow:0 4px 20px rgba(0,0,0,0.18); border-radius:6px; }
+.slide-inner { position:absolute; width:960px; height:540px; transform-origin:top left; }
+.preview-actions { position:fixed; bottom:0; left:0; right:0; padding:12px 16px 16px; background:rgba(248,246,244,0.97); backdrop-filter:blur(6px); border-top:1px solid var(--gray-line); z-index:100; display:flex; gap:10px; }
+.preview-back-btn { flex:1; padding:14px; background:transparent; color:var(--brown); border:1.5px solid var(--brown); border-radius:10px; font-family:inherit; font-size:14px; font-weight:700; cursor:pointer; }
+.preview-submit-btn { flex:2; padding:14px; background:var(--brown); color:#fff; border:none; border-radius:10px; font-family:inherit; font-size:15px; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(107,58,28,0.3); }
+.preview-submit-btn:disabled { background:#CCC; cursor:not-allowed; }
+
+@media (max-width: 600px) {
+  .row-2, .row-3 { grid-template-columns: 1fr; }
+  .container { padding: 16px 12px 48px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ════════ 진입 화면 ════════ -->
+<div class="intro-screen" id="intro-screen">
+  <p class="intro-church">사랑과평안의교회</p>
+  <div class="intro-year">2026</div>
+  <p class="intro-title">상반기 사역결산 &amp; 계획보고</p>
+  <p class="intro-sub">부서(팀) 및 기관별</p>
+  <div class="intro-divider"></div>
+  <div class="intro-btns">
+    <button class="intro-btn-primary" onclick="enterMain()">
+      보고서 작성하기 <span>→</span>
+    </button>
+    <button class="intro-btn-secondary" onclick="openPDF()">
+      📄 작년 결산보고서 보기
+    </button>
+  </div>
+  <p class="intro-footer">2026년 상반기 · 사랑과평안의교회 제직</p>
+</div>
+
+<!-- ════════ PDF 모달 ════════ -->
+<div class="pdf-modal" id="pdf-modal" onclick="closePDF(event)">
+  <div class="pdf-modal-inner">
+    <div class="pdf-modal-head">
+      <span>2025년 사역결산 보고서 (작년)</span>
+      <button class="pdf-close" onclick="closePDFBtn()" aria-label="닫기">✕</button>
+    </div>
+    <iframe id="pdf-frame" class="pdf-frame" src=""></iframe>
+  </div>
+</div>
+
+<!-- ════════ 메인 앱 (처음엔 숨김) ════════ -->
+<div id="main-app" style="display:none;">
+
+<div class="site-header">
+  <h1>📋 2026년 상반기 사역결산 &amp; 계획보고</h1>
+  <p>사랑과평안의교회 · 부서(팀) 및 기관별</p>
+</div>
+
+
+<div class="step-bar" id="step-bar">
+  <div class="step-item active" onclick="scrollToSection('s1')"><span class="step-num">①</span>부서선택</div>
+  <div class="step-item" onclick="scrollToSection('s2')"><span class="step-num">②</span>기본정보</div>
+  <div class="step-item" onclick="scrollToSection('s3')"><span class="step-num">③</span>부서소개</div>
+  <div class="step-item" onclick="scrollToSection('s4')"><span class="step-num">④</span>결산</div>
+  <div class="step-item" onclick="scrollToSection('s5')"><span class="step-num">⑤</span>계획</div>
+</div>
+<div class="container">
+
+  <div class="card" id="s1">
+    <div class="card-head">① 부서 · 기관 선택 <span class="badge">필수</span></div>
+    <div class="card-body">
+      <div class="form-row">
+        <label>부서 / 기관명 <span class="req">*</span></label>
+        <select id="dept-select" onchange="onDeptChange()">
+          <option value="">— 선택해 주세요 —</option>
+          <optgroup label="▸ 부서">
+            <option value="01|예배부">01 예배부</option>
+            <option value="01가|예배부/다윗성가대">01 예배부 / 다윗성가대</option>
+            <option value="01나|예배부/찬양팀">01 예배부 / 찬양팀</option>
+            <option value="02|교육부">02 교육부</option>
+            <option value="03|재정부">03 재정부</option>
+            <option value="04|새가족부">04 새가족부</option>
+            <option value="05|시설관리부">05 시설관리부</option>
+            <option value="06|환경미화부">06 환경미화부</option>
+            <option value="07|경조사부">07 경조사부</option>
+            <option value="08|친교봉사부">08 친교봉사부</option>
+            <option value="09|문화사역팀">09 문화사역팀</option>
+            <option value="10|여름수련회">10 여름수련회</option>
+            <option value="11|문서사역팀">11 문서사역팀</option>
+            <option value="12|방송사역팀">12 방송사역팀</option>
+            <option value="13|미디어사역팀">13 미디어사역팀</option>
+          </optgroup>
+          <optgroup label="▸ 기관">
+            <option value="기01|1장년 남선교회">01 1장년 남선교회</option>
+            <option value="기02|1장년 여선교회">02 1장년 여선교회</option>
+            <option value="기03|2장년 선교회">03 2장년 선교회</option>
+            <option value="기04|1,2청년부">04 1,2청년부</option>
+            <option value="기05|3청년부">05 3청년부</option>
+            <option value="기06|NGC">06 NGC</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s2">
+    <div class="card-head">② 기본 정보</div>
+    <div class="card-body">
+      <div class="row-2">
+        <div class="form-row">
+          <label>부서장 성명 · 직분 <span class="req">*</span></label>
+          <input type="text" id="leader" placeholder="예) 백박삼 장로">
+        </div>
+        <div class="form-row">
+          <label>차장 · 부장 성명 <span class="opt">(선택)</span></label>
+          <input type="text" id="sub-leader" placeholder="예) 신동현 집사">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>봉사 인원 수 <span class="req">*</span></label>
+        <input type="text" id="members" placeholder="예) 15명">
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s3">
+    <div class="card-head">③ 부서 소개 <span class="badge">슬라이드 1</span></div>
+    <div class="card-body">
+      <div class="form-row">
+        <label>부서 비전 / 표어 <span class="req">*</span></label>
+        <textarea id="vision" rows="3" placeholder="예) 하나님이 함께 하시고 기뻐하시는 예배&#10;그 예배를 준비하는 예배부"></textarea>
+      </div>
+      <div class="form-row">
+        <label>부서 핵심가치 및 목표 <span class="req">*</span></label>
+        <textarea id="values" rows="4" placeholder="각 항목을 줄 바꿔서 입력하세요.&#10;&#10;예)&#10;믿음으로 드리는 예배&#10;예배당에서 대화 최소화, 기도로 예배 준비&#10;예배시간 이동 및 핸드폰 금지"></textarea>
+        <p class="form-hint">한 줄 = 항목 1개. 자동으로 · 불릿이 붙습니다.</p>
+      </div>
+      <div class="form-row">
+        <label>조직도 <span class="req">*</span></label>
+        <div class="org-guide">
+          <strong>📌 입력 방법</strong>
+          <p>한 줄 = 한 단계. 같은 단계의 여러 직책은 <code>쉼표(,)</code>로 구분하세요.</p>
+          <div class="org-example">백박삼 장로<br>신동현 차장, 김은영 차장, 성가대</div>
+        </div>
+        <textarea id="org" rows="4" placeholder="백박삼 장로&#10;신동현 차장, 김은영 차장, 성가대"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s4">
+    <div class="card-head">④ 2026년 상반기 사역 결산 <span class="badge">슬라이드 2</span></div>
+    <div class="card-body">
+      <div class="form-row" style="margin-bottom:20px">
+        <label style="color:#2E7A4E">✓ 감사와 성과 (잘된 점) <span class="req">*</span></label>
+        <p class="form-hint" style="margin-bottom:8px">최소 1개, 최대 4개까지 입력하세요.</p>
+        <div style="display:grid;gap:8px">
+          <input type="text" id="ach1" placeholder="1. 예) 주일예배의 안정화(예배 전 기도 등)">
+          <input type="text" id="ach2" placeholder="2. (선택)">
+          <input type="text" id="ach3" placeholder="3. (선택)">
+          <input type="text" id="ach4" placeholder="4. (선택)">
+        </div>
+      </div>
+      <div class="form-row">
+        <label style="color:#8B4513">△ 아쉬움과 과제 (보완점) <span class="req">*</span></label>
+        <p class="form-hint" style="margin-bottom:8px">최소 1개, 최대 4개까지 입력하세요.</p>
+        <div style="display:grid;gap:8px">
+          <input type="text" id="chl1" placeholder="1. 예) 예배 위원 교육(안내) 필요">
+          <input type="text" id="chl2" placeholder="2. (선택)">
+          <input type="text" id="chl3" placeholder="3. (선택)">
+          <input type="text" id="chl4" placeholder="4. (선택)">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2026 계획 -->
+  <div class="card" id="s5">
+    <div class="card-head">⑤ 2026년 하반기 사역 계획 및 예산 <span class="badge">슬라이드 3</span></div>
+    <div class="card-body">
+      <p class="form-hint" style="margin-bottom:16px">핵심사역을 최소 1개 이상 입력하세요. 빈 항목은 표에서 제외됩니다.</p>
+
+      <div class="plan-box">
+        <div class="plan-box-head">핵심사역 1 <span style="color:#AAA;font-weight:400">(필수)</span></div>
+        <div class="form-row">
+          <label>구분 (사역명)</label>
+          <input type="text" id="p1name" placeholder="예) 예배준비">
+        </div>
+        <div class="form-row">
+          <label>실행 목표</label>
+          <textarea id="p1goal" rows="2" placeholder="예) 안정적인 예배 준비"></textarea>
+        </div>
+        <div class="form-row">
+          <label>주요 활동</label>
+          <textarea id="p1act" rows="2" placeholder="예) 예배위원 편성 및 안내&#10;예배 전 기도회 운영"></textarea>
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label>예산 (원) <span class="opt">숫자만 입력</span></label>
+          <input type="text" id="p1bud" placeholder="예) 300000  (없으면 비워두세요)">
+        </div>
+      </div>
+
+      <div class="plan-box collapsed" id="plan-box-2">
+        <div class="plan-box-head" onclick="togglePlan(2)">
+          <span>핵심사역 2 <span style="color:#AAA;font-weight:400">(선택)</span></span>
+          <span class="plan-toggle-icon">＋</span>
+        </div>
+        <div class="plan-body" style="max-height:600px">
+        <div class="form-row" style="margin-top:12px"><label>구분 (사역명)</label><input type="text" id="p2name" placeholder="예) 성가대"></div>
+        <div class="form-row"><label>실행 목표</label><textarea id="p2goal" rows="2" placeholder="예) 하나님께 찬양으로 영광을 돌린다"></textarea></div>
+        <div class="form-row"><label>주요 활동</label><textarea id="p2act" rows="2" placeholder="예) 주일예배 찬양"></textarea></div>
+        <div class="form-row" style="margin-bottom:0"><label>예산 (원)</label><input type="text" id="p2bud" placeholder="예) 9000000"></div>
+        </div>
+      </div>
+
+      <div class="plan-box collapsed" id="plan-box-3">
+        <div class="plan-box-head" onclick="togglePlan(3)">
+          <span>핵심사역 3 <span style="color:#AAA;font-weight:400">(선택)</span></span>
+          <span class="plan-toggle-icon">＋</span>
+        </div>
+        <div class="plan-body" style="max-height:600px">
+        <div class="form-row" style="margin-top:12px"><label>구분 (사역명)</label><input type="text" id="p3name" placeholder="예) 성찬식"></div>
+        <div class="form-row"><label>실행 목표</label><textarea id="p3goal" rows="2"></textarea></div>
+        <div class="form-row"><label>주요 활동</label><textarea id="p3act" rows="2"></textarea></div>
+        <div class="form-row" style="margin-bottom:0"><label>예산 (원)</label><input type="text" id="p3bud"></div>
+        </div>
+      </div>
+
+      <div class="form-row" style="margin-top:8px;margin-bottom:0">
+        <label>기타 전달사항 <span class="opt">(선택)</span></label>
+        <textarea id="note" rows="2" placeholder="담임목사님께 전달할 내용 등"></textarea>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="loading" id="loading">
+    <span class="spinner"></span> PPT 생성 중입니다. 잠시만 기다려 주세요...
+  </div>
+
+  <div class="result-box" id="result">
+    <div class="ok-icon">✅</div>
+    <p id="result-text">PPT 파일이 생성되었습니다!</p>
+    <small>다운로드 폴더를 확인하세요.</small>
+  </div>
+
+  <div class="error-box" id="error-box"></div>
+
+</div><!-- /container -->
+
+  <!-- 하단 고정 버튼 -->
+  <div class="btn-fixed-wrap">
+    <button class="btn-generate" id="gen-btn" onclick="showPreview()">
+      <span class="icon">👁</span> 슬라이드 미리보기
+    </button>
+  </div>
+
+
+</div><!-- /main-app -->
+<!-- ════════ 슬라이드 미리보기 화면 ════════ -->
+<div class="preview-screen" id="preview-screen">
+  <div class="preview-topbar">
+    <div>
+      <h2>📊 슬라이드 미리보기</h2>
+      <p>내용을 확인하고 최종 제출하세요</p>
+    </div>
+  </div>
+  <div class="preview-slides">
+    <div>
+      <div class="slide-label">슬라이드 1 — 부서 소개</div>
+      <div class="slide-wrap" id="slide-wrap-1"><div class="slide-inner" id="slide-1-inner"></div></div>
+    </div>
+    <div>
+      <div class="slide-label">슬라이드 2 — 2026년 상반기 사역 결산</div>
+      <div class="slide-wrap" id="slide-wrap-2"><div class="slide-inner" id="slide-2-inner"></div></div>
+    </div>
+    <div>
+      <div class="slide-label">슬라이드 3 — 2026년 하반기 사역 계획 및 예산</div>
+      <div class="slide-wrap" id="slide-wrap-3"><div class="slide-inner" id="slide-3-inner"></div></div>
+    </div>
+  </div>
+  <!-- 하단 고정 버튼 -->
+  <div class="preview-actions">
+    <button class="preview-back-btn" onclick="backToForm()">✏️ 수정하기</button>
+    <button class="preview-submit-btn" id="submit-btn" onclick="submitFinal()">📥 최종 제출 (PPT 다운로드)</button>
+  </div>
+  <div class="loading" id="preview-loading" style="text-align:center;padding:16px;display:none;">
+    <span class="spinner"></span> PPT 생성 중…
+  </div>
+  <div class="result-box" id="preview-result" style="margin:0 16px 16px;display:none;">
+    <div class="ok-icon">✅</div>
+    <p id="preview-result-text"></p>
+    <small>다운로드 폴더를 확인하세요.</small>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<script>
+// ────────────────────────────────────────────
+// 유틸
+// ────────────────────────────────────────────
+// ────────────────────────────────────────────
+// 진입화면 / PDF 모달
+// ────────────────────────────────────────────
+const PDF_URL = './report_2025.pdf'; // GitHub에 올린 작년 PDF 파일명
+
+function enterMain() {
+  document.getElementById('intro-screen').style.display = 'none';
+  document.getElementById('main-app').style.display = 'block';
+  document.getElementById('preview-screen').style.display = 'none';
+  window.scrollTo(0, 0);
+  setTimeout(initStepObserver, 100);
+}
+
+function openPDF() {
+  if (window.innerWidth < 768) {   // 모바일 → 새 탭
+    window.open(PDF_URL, '_blank');
+    return;
+  }
+  document.getElementById('pdf-frame').src = PDF_URL;  // PC → 모달
+  document.getElementById('pdf-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closePDF(e) {
+  if (e.target.id === 'pdf-modal') closePDFBtn();
+}
+
+function closePDFBtn() {
+  document.getElementById('pdf-modal').style.display = 'none';
+  document.getElementById('pdf-frame').src = '';
+  document.body.style.overflow = '';
+}
+
+
+// ── UX 개선 JS ──────────────────────────────
+function togglePlan(n) {
+  const box = document.getElementById('plan-box-' + n);
+  if (box.classList.contains('collapsed')) {
+    box.classList.remove('collapsed');
+    box.classList.add('open');
+  } else {
+    box.classList.remove('open');
+    box.classList.add('collapsed');
+  }
+}
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function initStepObserver() {
+  const sections = ['s1','s2','s3','s4','s5'];
+  const items = document.querySelectorAll('.step-item');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = sections.indexOf(e.target.id);
+        if (idx >= 0) {
+          items.forEach(el => el.classList.remove('active'));
+          items[idx].classList.add('active');
+        }
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-60px 0px -40% 0px' });
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+}
+
+
+// ════════════════════════════════════════════════
+//  슬라이드 미리보기 시스템
+// ════════════════════════════════════════════════
+const SP = 28.35; // 1cm → px (원본 960×540 기준)
+function sp(cm){ return (cm * SP).toFixed(1); }
+
+// ── 공통 헤더 HTML (모든 슬라이드) ─────────────
+function slideHeaderHTML(section, d) {
+  return `
+    <div style="position:absolute;left:${sp(0.85)}px;top:${sp(0.45)}px;font-size:15.5px;font-weight:700;color:#333333;white-space:nowrap;font-family:'Malgun Gothic',sans-serif">
+      2026년 사랑과평안의교회 상반기 결산보고
+    </div>
+    <div style="position:absolute;right:${sp(0.85)}px;top:${sp(0.72)}px;font-size:8.5px;color:#969696;font-family:'Malgun Gothic',sans-serif">${section}</div>
+    <div style="position:absolute;left:${sp(0.85)}px;right:${sp(0.85)}px;top:${sp(1.78)}px;height:0.7px;background:#BBBBBB"></div>
+    <div style="position:absolute;left:${sp(0.85)}px;top:${sp(2.45)}px;font-size:22px;font-weight:700;color:#6B3A1C;font-family:'Malgun Gothic',sans-serif">
+      ${d.no}&nbsp;&nbsp;${d.dept}
+    </div>
+    <div style="position:absolute;right:${sp(0.85)}px;bottom:${sp(0.4)}px;font-size:7px;color:#969696;font-family:'Malgun Gothic',sans-serif">5/62</div>
+  `;
+}
+
+// ── 조직도 HTML 트리 ─────────────────────────────
+function orgChartHTML(orgText, bw, bh) {
+  const levels = parseOrg(orgText);
+  if (!levels.length) return '<div style="color:#999;font-size:9px;text-align:center;padding-top:20px">조직도 없음</div>';
+  const padX=16, padY=20;
+  const aW=bw-2*padX, aH=bh-2*padY;
+  const n=levels.length, boxH=34;
+  const vGap=n>1?(aH-n*boxH)/(n-1):0;
+
+  let svgContent='', allPos=[];
+  for(let lv=0;lv<n;lv++){
+    const items=levels[lv], m=items.length;
+    const bW=Math.min(120,(aW-(m-1)*10)/m);
+    const totW=m*bW+(m-1)*10;
+    const sX=padX+(aW-totW)/2;
+    const rowY=padY+lv*(boxH+vGap);
+    const rp=[];
+    for(let k=0;k<m;k++){
+      const bx=sX+k*(bW+10);
+      svgContent+=`<rect x="${bx}" y="${rowY}" width="${bW}" height="${boxH}" rx="4" fill="#fff" stroke="#555" stroke-width="1.2"/>`;
+      svgContent+=`<text x="${bx+bW/2}" y="${rowY+boxH/2+4}" text-anchor="middle" font-size="9" font-weight="700" fill="#333" font-family="'Malgun Gothic',sans-serif">${items[k]}</text>`;
+      rp.push({cx:bx+bW/2, top:rowY, bottom:rowY+boxH});
+    }
+    allPos.push(rp);
+  }
+  for(let lv=0;lv<n-1;lv++){
+    const par=allPos[lv], chi=allPos[lv+1];
+    const pCx=par.length===1?par[0].cx:(par[0].cx+par[par.length-1].cx)/2;
+    const pBt=par[0].bottom, cTo=chi[0].top, midY=(pBt+cTo)/2;
+    svgContent+=`<line x1="${pCx}" y1="${pBt}" x2="${pCx}" y2="${midY}" stroke="#888" stroke-width="0.8"/>`;
+    if(chi.length>1) svgContent+=`<line x1="${chi[0].cx}" y1="${midY}" x2="${chi[chi.length-1].cx}" y2="${midY}" stroke="#888" stroke-width="0.8"/>`;
+    chi.forEach(c=>{ svgContent+=`<line x1="${c.cx}" y1="${midY}" x2="${c.cx}" y2="${cTo}" stroke="#888" stroke-width="0.8"/>`; });
+  }
+  return `<svg width="${bw}" height="${bh}" xmlns="http://www.w3.org/2000/svg">${svgContent}</svg>`;
+}
+
+// ── 슬라이드 1: 부서 소개 ───────────────────────
+function buildSlide1HTML(d) {
+  const valHTML = d.values.map(v=>`<div style="margin-bottom:3px">·&nbsp;${v}</div>`).join('');
+  const orgW=sp(16.05)*1, orgH=sp(8.5)*1;
+  const orgHTML = orgChartHTML(d.org, parseFloat(orgW), parseFloat(orgH));
+  return `<div style="position:absolute;inset:0;background:#fff;overflow:hidden">
+    ${slideHeaderHTML('부서 소개', d)}
+    <!-- 비전 헤더 -->
+    <div style="position:absolute;left:${sp(0.95)}px;top:${sp(4.95)}px;width:${sp(15.2)}px;height:${sp(1.35)}px;background:#6B3A1C;display:flex;align-items:center;justify-content:center">
+      <span style="color:#fff;font-size:10px;font-weight:700;font-family:'Malgun Gothic',sans-serif">부서 비전 / 표어</span>
+    </div>
+    <!-- 비전 본문 -->
+    <div style="position:absolute;left:${sp(0.95)}px;top:${sp(6.30)}px;width:${sp(15.2)}px;height:${sp(3.0)}px;border:1.5px solid #6B3A1C;display:flex;align-items:center;justify-content:center;padding:6px;text-align:center">
+      <span style="font-size:9px;color:#222;font-family:'Malgun Gothic',sans-serif;line-height:1.6">${d.vision.replace(/\n/g,'<br>')}</span>
+    </div>
+    <!-- 핵심가치 헤더 -->
+    <div style="position:absolute;left:${sp(0.95)}px;top:${sp(9.75)}px;width:${sp(15.2)}px;height:${sp(1.35)}px;background:#6B3A1C;display:flex;align-items:center;justify-content:center">
+      <span style="color:#fff;font-size:10px;font-weight:700;font-family:'Malgun Gothic',sans-serif">부서 핵심가치 및 목표</span>
+    </div>
+    <!-- 핵심가치 본문 -->
+    <div style="position:absolute;left:${sp(0.95)}px;top:${sp(11.10)}px;width:${sp(15.2)}px;height:${sp(3.7)}px;border:1.5px solid #6B3A1C;display:flex;align-items:flex-start;padding:8px;overflow:hidden">
+      <div style="font-size:8.5px;color:#222;font-family:'Malgun Gothic',sans-serif;line-height:1.7">${valHTML}</div>
+    </div>
+    <!-- 조직도 헤더 -->
+    <div style="position:absolute;left:${sp(16.85)}px;top:${sp(4.95)}px;width:${sp(16.05)}px;height:${sp(1.35)}px;background:#A0DD8D;display:flex;align-items:center;justify-content:center">
+      <span style="color:#2A4A1E;font-size:10px;font-weight:700;font-family:'Malgun Gothic',sans-serif">조직도</span>
+    </div>
+    <!-- 조직도 본문 -->
+    <div style="position:absolute;left:${sp(16.85)}px;top:${sp(6.30)}px;width:${sp(16.05)}px;height:${sp(8.5)}px;border:1.5px solid #6B3A1C;overflow:hidden">
+      ${orgHTML}
+    </div>
+  </div>`;
+}
+
+// ── 슬라이드 2: 결산 ─────────────────────────────
+function buildSlide2HTML(d) {
+  const achHTML = d.achievements.filter(Boolean).map((a,i)=>`<div style="margin-bottom:5px">${i+1}.&nbsp;&nbsp;${a}</div>`).join('');
+  const chlHTML = d.challenges.filter(Boolean).map((c,i)=>`<div style="margin-bottom:5px">${i+1}.&nbsp;&nbsp;${c}</div>`).join('');
+  return `<div style="position:absolute;inset:0;background:#fff;overflow:hidden">
+    ${slideHeaderHTML('2026년 상반기 사역결산', d)}
+    <!-- 잘된점 헤더 -->
+    <div style="position:absolute;left:${sp(0.95)}px;top:${sp(4.95)}px;width:${sp(15.4)}px;height:${sp(1.2)}px;background:#F0F0F0;display:flex;align-items:center;justify-content:center">
+      <span style="font-size:10px;font-weight:700;color:#222;font-family:'Malgun Gothic',sans-serif">감사와 성과 (잘된 점)</span>
+    </div>
+    <!-- 잘된점 본문 -->
+    <div style="position:absolute;left:${sp(0.95)}px;top:${sp(6.15)}px;width:${sp(15.4)}px;height:${sp(8.65)}px;border:1.5px solid #6B3A1C;padding:8px;overflow:hidden">
+      <div style="font-size:8.5px;color:#222;font-family:'Malgun Gothic',sans-serif;line-height:1.8">${achHTML}</div>
+    </div>
+    <!-- 아쉬운점 헤더 -->
+    <div style="position:absolute;left:${sp(16.65)}px;top:${sp(4.95)}px;width:${sp(16.25)}px;height:${sp(1.2)}px;background:#F0F0F0;display:flex;align-items:center;justify-content:center">
+      <span style="font-size:10px;font-weight:700;color:#222;font-family:'Malgun Gothic',sans-serif">아쉬움과 과제 (보완점)</span>
+    </div>
+    <!-- 아쉬운점 본문 -->
+    <div style="position:absolute;left:${sp(16.65)}px;top:${sp(6.15)}px;width:${sp(16.25)}px;height:${sp(8.65)}px;border:1.5px solid #6B3A1C;padding:8px;overflow:hidden">
+      <div style="font-size:8.5px;color:#222;font-family:'Malgun Gothic',sans-serif;line-height:1.8">${chlHTML}</div>
+    </div>
+  </div>`;
+}
+
+// ── 슬라이드 3: 계획 표 ──────────────────────────
+function buildSlide3HTML(d) {
+  const TX=parseFloat(sp(0.95)), TW=parseFloat(sp(31.95));
+  const ratios=[0.155,0.275,0.345,0.225];
+  const CW=ratios.map(r=>TW*r);
+  const CX=[TX, TX+CW[0], TX+CW[0]+CW[1], TX+CW[0]+CW[1]+CW[2]];
+  const hdrs=['구분','실행 목표','주요 활동','예산(안)'];
+  const TOP=parseFloat(sp(4.95)), HH=parseFloat(sp(1.35)), RH=parseFloat(sp(2.5));
+
+  let tableHTML='';
+  // 헤더
+  hdrs.forEach((h,i)=>{
+    tableHTML+=`<div style="position:absolute;left:${CX[i]}px;top:${TOP}px;width:${CW[i]}px;height:${HH}px;background:#8C6E63;display:flex;align-items:center;justify-content:center;border-right:1px solid rgba(255,255,255,0.3)">
+      <span style="color:#fff;font-size:9.5px;font-weight:700;font-family:'Malgun Gothic',sans-serif">${h}</span>
+    </div>`;
+  });
+  // 행
+  const rows=d.plans.filter(r=>r.name);
+  let total=0;
+  rows.forEach((row,r)=>{
+    const y=TOP+HH+r*RH;
+    const fill=r%2===0?'#CDD1DA':'#FFFFFF';
+    const cols=[row.name, row.goal, row.actions, row.budget||'-'];
+    cols.forEach((c,i)=>{
+      tableHTML+=`<div style="position:absolute;left:${CX[i]}px;top:${y}px;width:${CW[i]}px;height:${RH}px;background:${fill};border:0.5px solid #BBBBBB;display:flex;align-items:center;justify-content:center;padding:4px;overflow:hidden">
+        <span style="font-size:${i===0?9:8}px;font-weight:${i===0?'700':'400'};color:#222;font-family:'Malgun Gothic',sans-serif;text-align:center;line-height:1.5;word-break:keep-all">${(c||'-').replace(/\n/g,'<br>')}</span>
+      </div>`;
+    });
+    const n=parseInt(String(row.budget||'0').replace(/[^0-9]/g,''));
+    if(!isNaN(n)) total+=n;
+  });
+  // 합계
+  const sumY=TOP+HH+rows.length*RH;
+  const sumW=CW[0]+CW[1]+CW[2];
+  tableHTML+=`<div style="position:absolute;left:${CX[0]}px;top:${sumY}px;width:${sumW}px;height:${parseFloat(sp(1.3))}px;background:#F0F0F0;display:flex;align-items:center;justify-content:center">
+    <span style="font-size:11px;font-weight:700;font-family:'Malgun Gothic',sans-serif">합&nbsp;&nbsp;계</span>
+  </div>
+  <div style="position:absolute;left:${CX[3]}px;top:${sumY}px;width:${CW[3]}px;height:${parseFloat(sp(1.3))}px;background:#F0F0F0;display:flex;align-items:center;justify-content:center">
+    <span style="font-size:10px;font-weight:700;font-family:'Malgun Gothic',sans-serif">${total>0?total.toLocaleString():'-'}</span>
+  </div>`;
+
+  return `<div style="position:absolute;inset:0;background:#fff;overflow:hidden">
+    ${slideHeaderHTML('2026년 하반기 사역계획 및 예산', d)}
+    ${tableHTML}
+  </div>`;
+}
+
+// ── 슬라이드 크기 조정 ─────────────────────────────
+function scaleSlides() {
+  [1,2,3].forEach(n=>{
+    const wrap=document.getElementById('slide-wrap-'+n);
+    const inner=document.getElementById('slide-'+n+'-inner');
+    if(!wrap||!inner) return;
+    const scale=wrap.offsetWidth/960;
+    inner.style.transform=`scale(${scale})`;
+  });
+}
+
+// ── 미리보기 표시 ────────────────────────────────
+function showPreview() {
+  const errBox=document.getElementById('error-box');
+  errBox.classList.remove('show');
+  const d=collectData();
+  const err=validate(d);
+  if(err){ errBox.textContent='⚠️  '+err; errBox.classList.add('show'); return; }
+
+  document.getElementById('slide-1-inner').innerHTML=buildSlide1HTML(d);
+  document.getElementById('slide-2-inner').innerHTML=buildSlide2HTML(d);
+  document.getElementById('slide-3-inner').innerHTML=buildSlide3HTML(d);
+
+  document.getElementById('main-app').style.display='none';
+  const ps=document.getElementById('preview-screen');
+  ps.style.display='block';
+  window.scrollTo(0,0);
+  setTimeout(scaleSlides, 80);
+  window.addEventListener('resize', scaleSlides);
+}
+
+// ── 폼으로 돌아가기 ─────────────────────────────
+function backToForm() {
+  document.getElementById('preview-screen').style.display='none';
+  document.getElementById('main-app').style.display='block';
+  document.getElementById('preview-result').style.display='none';
+  window.scrollTo(0,0);
+}
+
+// ── 최종 제출 (PPT 다운로드 + 이메일) ────────────
+async function submitFinal() {
+  const btn=document.getElementById('submit-btn');
+  const loading=document.getElementById('preview-loading');
+  const result=document.getElementById('preview-result');
+
+  btn.disabled=true;
+  loading.style.display='block';
+  result.style.display='none';
+
+  try {
+    await new Promise(res=>setTimeout(res,80));
+    const d=collectData();
+    const pres=new PptxGenJS();
+    pres.defineLayout({name:'WIDE',width:13.33,height:7.5});
+    pres.layout='WIDE';
+    buildSlide1(pres,d);
+    buildSlide2(pres,d);
+    buildSlide3(pres,d);
+    const fileName=d.no+'_'+d.dept+'_2026상반기결산보고.pptx';
+    await pres.writeFile({fileName});
+    document.getElementById('preview-result-text').textContent=`${d.dept} PPT 파일이 다운로드 됩니다!`;
+    result.style.display='block';
+    sendEmailNotification(d).catch(e=>console.warn('이메일 전송 실패:',e));
+  } catch(e){
+    alert('오류: '+e.message);
+  } finally {
+    btn.disabled=false;
+    loading.style.display='none';
+  }
+}
+
+const C = (cm) => cm * 0.3937; // cm → inch
+const v = (id) => document.getElementById(id)?.value?.trim() || '';
+
+// ────────────────────────────────────────────
+// 작년 PDF 데이터 (18개 부서·기관 전체)
+// ────────────────────────────────────────────
+const DEPT_DATA = {
+
+'01|예배부': {
+  leader:'백박삼 장로', subLeader:'신동현 차장, 김은영 차장', members:'',
+  vision:'하나님이 함께 하시고 기뻐하시는 예배\n그 예배를 준비하는 예배부',
+  values:'믿음으로 드리는 예배\n예배당에서 대화 최소화, 기도로 예배 준비\n예배시간 이동 및 핸드폰 금지',
+  org:'백박삼 장로\n신동현 차장, 김은영 차장, 성가대',
+  ach:['주일예배의 안정화(예배 전 기도 등)','성가대의 안정화와 성장','예배 지각자 감소 / 예배 중 이동인원 감소',''],
+  chl:['예배 위원 교육(안내) 필요','예배부 인력 충원 필요','예배부 역할 정의 필요',''],
+  plans:[
+    {name:'예배준비', goal:'안정적인 예배 준비', actions:'예배위원 편성 및 안내\n예배 전 기도회 운영', budget:''},
+    {name:'성가대', goal:'하나님께 찬양으로 영광을 돌린다', actions:'주일예배 찬양', budget:'9000000'},
+    {name:'성찬식', goal:'성찬식 준비 및 정리', actions:'주요절기 성찬식', budget:'300000'},
+  ]},
+
+'01가|예배부/다윗성가대': {
+  leader:'김영 성가대장', subLeader:'조아라 지휘자', members:'',
+  vision:'예배의 문을 여는 천상의 하모니',
+  values:'하나님께 영광을 돌리며 하나님을 기뻐하고 즐거워함으로 노래한다.\n찬양을 통해 대원들의 신앙을 굳게 다지며 공동체적 유대를 강화한다.\n꾸준한 훈련과 배움을 통해 리듬·선율·화성의 조화를 균형있게 실현하여 음악적 완성도를 높인다.\n교회 행사 및 지역사회에서 음악을 통한 섬김과 봉사를 실천한다.',
+  org:'성가대장 김영, 지휘자 조아라\n소프라노: 조아라 이수정 정상원 김고은 신세명\n알토: 김은영 이경영 진숙현\n테너: 이현민 이재영 박홍철 박찬욱\n베이스: 김영 박옥수 정철헌',
+  ach:['매달 첫주는 악기 특주 진행(대금, 섹소폰, 바이올린, 피아노 특주)','어린이합창단과 합동찬양 진행(추수감사절기 등)','',''],
+  chl:['음악워크숍(발성, 화성, 지휘법 등) 미진행[연2회] - 참여인원이 저조하여 진행되지 못함','성탄절 칸타타 미진행','',''],
+  plans:[
+    {name:'매주찬양', goal:'은혜로운 찬양 발표', actions:'예배찬양곡 연습 및 발표(주일아침 연습 간 간식운영)', budget:'2500000'},
+    {name:'음악워크숍', goal:'개인 역량 강화', actions:'연2회(겨울, 여름) 음악워크숍(발성, 화성, 지휘법 등)', budget:'1000000'},
+    {name:'특별행사', goal:'절기 찬양 진행', actions:'부활절, 추수감사절, 성탄절 칸타타(별도 악보 구매)', budget:'500000'},
+  ]},
+
+'01나|예배부/찬양팀': {
+  leader:'김은영', subLeader:'', members:'',
+  vision:'진실된 예배자로 먼저 서고 최선의 것을 드리자',
+  values:'진실된 예배자로서 서기\n최선의 것을 하나님께 드리기\n성령 안에서 하나되기\n예배찬양 가운데 모두가 하나님을 경험하기',
+  org:'반주자 오세빈(주일), 장보라(금요)\nPPT 최영욱\n찬양인도자 김은영, 조아라, 이현민, 이재영',
+  ach:['4명의 찬양인도자가 2주간 돌아가며 찬양인도 진행 - 여러 사역을 겸하고 있는 각 인도자들의 부담 축소','각 담당자들의 성실한 참여로 안정적인 운영','월 1회 주일대예배 전 합심기도 - 영적으로 준비, 하나된 마음으로 찬양에 임함',''],
+  chl:['기도와 연습시간의 부족(사역 중첩) - 연습시간 부족으로 영적/음악적 성장에 대한 아쉬움','예배 후 상호간 피드백 부족 - 찬양 및 개인 발전에 대한 아쉬움','다음 세대 찬양팀을 위한 준비 부족 - 세대간 연계 및 매뉴얼 부재',''],
+  plans:[
+    {name:'예배찬양인도', goal:'하나님을 만나는 예배, 서로 화답하는 예배', actions:'찬양팀의 영적성장 + 음악적 성장', budget:''},
+    {name:'찬양팀 성장', goal:'성장해가는 찬양팀', actions:'월1회 기도모임\n예배 후 상호간의 피드백\n인도자의 로테이션 회중찬양 참여로 객관적인 모니터링', budget:''},
+    {name:'찬양팀 사역 매뉴얼화', goal:'다음세대를 위한 찬양팀(매뉴얼 준비)', actions:'찬양 콘티 작업/인도 매뉴얼 작성\n찬양 콘티 자료화', budget:''},
+  ]},
+
+'02|교육부': {
+  leader:'박경애 목사', subLeader:'', members:'',
+  vision:'우리 주 예수 그리스도를 참 사랑하여 매일 즐겁게 말씀 읽고 암송하고 회개하자',
+  values:'하나님의 사람으로 온전하여지고 모든 선한 일을 행할 능력을 갖추어 가는 교육',
+  org:'박경애 목사님\n임희석, 정명순, 장보라, 이반석 (주일학교)\n신동현, 김선우, 이재영, 박찬욱, 고강미, 김은혜, 이반석 간사 (어와나)',
+  ach:['[유아유치부] 예배의 안정화, 십계명 암송','[초등부] 매일 바이블타임 하는 것이 정착, 매일 암송 말씀 쓰면서 암송하기 정착','[중고등부] 스스로 예배드리는 영적 분위기 확립','[어와나] 프로그램 시스템화, 교회의 즐거움 제공, 소극적인 아이들도 적극참여(게임, 암송)'],
+  chl:['인원 감소 (전도 및 출산 필요)','교사 부족(초등부_고학년, 중등부 분반 필요)','유아유치부 십계명 교사교안 미완성',''],
+  plans:[
+    {name:'교육부 캠프(2회)', goal:'성령님을 인격적으로 만나는 기회, 공동체성 확립', actions:'말씀과 기도, 친교\n예배 미참석자 참여 독려', budget:'2000000'},
+    {name:'절기행사', goal:'축하와 격려, 기쁨 나눔', actions:'입학식, 졸업식\n어린이주일/성탄주일 선물', budget:'1000000'},
+    {name:'어와나 달란트잔치(2회)', goal:'암송 동기부여', actions:'반년간 모은 달란트로 물품 및 음식 구입\n(연2회 진행_어린이날, 크리스마스)', budget:'800000'},
+  ]},
+
+'03|재정부': {
+  leader:'박명랑 장로', subLeader:'최훈 집사', members:'',
+  vision:'하나님의 물질을 가장 투명하고 효율적으로 관리하자',
+  values:'투명하고 체계적인 재정부 업무절차 수립\n절약하되 하나님의 일을 하는데 부족함이 없도록 최선의 관리를 하자',
+  org:'박명랑 장로 (재정부장)\n최훈 집사 (차장), 고강미 집사, 진숙현 집사',
+  ach:['2025년 재정 건전성 증대','적기 4개 분기 재정보고 및 감사 완료','재정에 대해서 보다 정밀하게 검토함','전산회계 프로그램이 잘 정착되고 있음'],
+  chl:['전산회계 행정 고도화(장기 목표 과제)','제한된 인원과 제원 및 환경을 통한 업무수행','교인들의 지저스온 친숙화를 위한 노력 필요',''],
+  plans:[
+    {name:'재정 건전성 유지', goal:'적기 재정회계처리 및 전산입력 완료', actions:'분기별 재정보고 및 감사 진행', budget:''},
+    {name:'각 부서 예산지출 관리', goal:'부서별 예산집행 시 사전협의 실시', actions:'예산 집행 협의 및 승인 절차 운영', budget:''},
+    {name:'재정부 업무 효율화', goal:'전산회계 프로그램 적용의 고도화(장기 추진 목표)', actions:'전산회계 프로그램 고도화 지속 추진', budget:''},
+  ]},
+
+'04|새가족부': {
+  leader:'이현민', subLeader:'최도선, 김화경', members:'',
+  vision:'교회에 방문하는 새가족이 좋은 신앙인이 되도록 돕는다 / 좋은 교인이 되도록 돕는다',
+  values:'방문한 새가족을 따뜻하게 맞이한다.\n예배생활과 성경공부를 통해 올바른 복음을 알 수 있도록 돕는다.\n교회 목적과 방향을 분명하게 인식하도록 돕는다.\n교회생활을 성실하게 잘 할 수 있도록 돕는다.',
+  org:'이현민\n최도선, 김화경, 이승수, 박경애, 이반석',
+  ach:['운영 매뉴얼 작업을 통한 대화의 시간','새가족부 인원 충원(김화경, 이반석)','회의를 통한 소통의 부재 일부 해소','교인 등록 4인(오세빈, 유진, 최영욱, 정의빈) - \'25년 방문자 15명, 출석 중인 새가족 5명'],
+  chl:['매뉴얼에 의한 운영 다소 부족','소통을 위한 시간 부족','매뉴얼에 의한 운영 정착 및 정기적인 회의를 통한 새가족 상황 공유 및 소통 필요',''],
+  plans:[
+    {name:'새가족 성경공부', goal:'새가족 성경공부 교재 지원 및 등록 선물', actions:'성경공부 진행 시 필요한 교재 지원\n교인 서약 시 선물', budget:'300000'},
+    {name:'새가족 OT', goal:'새가족 OT 진행', actions:'OT 진행 시 다과', budget:'60000'},
+    {name:'새가족 초청모임', goal:'새가족의 믿음 성장 지원', actions:'새가족만을 위한 별도의 시간 운용\n(ex_남성데이, 여성데이)', budget:'400000'},
+  ]},
+
+'05|시설관리부': {
+  leader:'정창수', subLeader:'유동진, 정철헌', members:'',
+  vision:'시설이 편안한 교회 생활',
+  values:'기존 시설의 유지보수\n(재건축 이전까지는 긴축, 실용성 중점)\n2026년 안전과 주방',
+  org:'정창수\n유동진, 정철헌',
+  ach:['2층(소예배실) 에어컨 교체로 예배와 모임에 불편사항 제거','전산화로 인한 예산 관리의 편리함','환경미화와 분리로 시설에 관한 집중도 상승',''],
+  chl:['에어컨 실외기 재배치 비용 추가로 주방개선공사 2026년에 시작하기로 함','전문적인 능력 없이 사역 진행','2026년은 10세 미만 성도를 위한 안전관리',''],
+  plans:[
+    {name:'안전한 교회 생활', goal:'복도 유리창 보수 창틀 보완, 문 손 끼임 방지 등', actions:'복도 유리창 보수 및 창틀 보완\n문 손 끼임 방지 설치', budget:'1000000'},
+    {name:'주방의 편리함', goal:'주방 온수와 수전구 교체 확장', actions:'주방 온수 및 수전구 교체 공사', budget:'3800000'},
+    {name:'편리한 교회 생활', goal:'시설물의 유지보수', actions:'시설물 정기 점검 및 유지보수', budget:'1000000'},
+  ]},
+
+'06|환경미화부': {
+  leader:'박은실', subLeader:'이재영 차장', members:'',
+  vision:'내가 먼저 하자 + 두 눈을 크게 뜨자',
+  values:'교회 구석구석 청결 및 정리정돈\n재건축 전까지 최소의 비용으로 청결 및 정리정돈\n불필요한 물건 정리',
+  org:'박은실 부장\n이재영 차장',
+  ach:['성도들의 쾌적한 교회 생활을 위해 청결관리와 필요한 비품 상시 보급','제직 청소 담당제 운영을 통해 청결 상태 유지','시설부와 연합하여 미화와 시설에 필요한 업무들을 상호보완하여 진행','전교인 대청소를 통해 교회를 내 몸같이 생각하고 하나된 마음을 가짐'],
+  chl:['비전문 인원이 담당하여 청소를 하다보니 높은 기준의 제시에 대한 어려움','본당을 제외하고 청결 상태가 미흡하다고 판단','청소 시기와 사용 시기 차이로 인한 청결 유지의 어려움 - 사용자 정리정돈 교육 필요',''],
+  plans:[
+    {name:'쾌적한 교회 생활', goal:'필요 물품 상시 보급', actions:'청소 용품 및 비품 적시 보급', budget:''},
+    {name:'청소 담당제 시스템 보완', goal:'교회의 청결도 상승', actions:'역할 배정 및 안내 매뉴얼 구비\n청소 용품 적시 보급\n사용자 정리정돈 교육\n재직 청소 구역 6개월 단위 변경', budget:''},
+    {name:'전교인 대청소', goal:'교회를 내 몸과 같이 여기는 마음에 모두가 동참', actions:'청소 담당 구역 배정 / 청소 용품 준비 / 지침 및 관리', budget:''},
+  ]},
+
+'07|경조사부': {
+  leader:'최도선', subLeader:'', members:'',
+  vision:'기쁨과 슬픔의 자리마다 교회의 사랑으로 함께합니다.',
+  values:'경조사부는 성도 개인과 가정의 삶의 중요한 순간마다 교회 공동체의 감사가 실제적으로 전달되도록 섬김의 실천\n경사시 함께 기쁨을 나누고, 조사시 신속하고 질서있는 위로로 성도들이 교회 안에서 참된 공동체를 경험하도록 돕는다.',
+  org:'최도선\n부서원 추가 요함',
+  ach:['경조 발생 시 비교적 신속한 공유와 대응이 이루어져 성도와 가정에 실제적인 도움과 위로를 제공함','성도들이 모두 경조사에 적극적으로 참여함','슬픔의 현장에서 함께 기도하고, 기쁨의 자리에서 함께 축복하며 교회 공동체의 의미를 다시 확인함',''],
+  chl:['경조 기준과 역할 분담이 문서화되지 않아, 상황에 따라 혼선이 발생한 경우 있었음','경조사부 1인 담당으로 업무 집중','사역의 연속성을 위한 세대간 계승 필요',''],
+  plans:[
+    {name:'신속하고 일관된 대응 체계 확립', goal:'경조 발생 시 연락 체계 및 보고 흐름 정비', actions:'경조 발생 시 연락 체계 정비\n경조사별 기본 대응 절차 정리\n조사 시 교회 대표성 유지 및 유가족 배려 중심 운영', budget:''},
+    {name:'품위 있고 절제된 교회 문화 정착', goal:'조사·경사 사역의 절제된 운영', actions:'장례 발생 시 위로예배 및 조문 일정 지원\n결혼, 출산 등 경사 발생 시 교회 차원의 축하 전달', budget:''},
+    {name:'세대간 사역 계승', goal:'지속 가능한 부서 운영', actions:'40~50대 집사 참여 확대 유도\n신규 부서원 간단 사역 안내 및 역할 공유', budget:''},
+  ]},
+
+'08|친교봉사부': {
+  leader:'박혜경', subLeader:'노정희, 박은실, 임희석', members:'',
+  vision:'마르다처럼 봉사하는 마리아',
+  values:'하나님의 나라는 먹는 것과 마시는 것이 아니요 오직 성령 안에 있는 의와 평강과 희락이라\n이로써 그리스도를 섬기는 자는 하나님을 기쁘시게 하며 사람에게도 칭찬을 받느니라. (롬14:17-18)',
+  org:'박혜경\n노정희, 박은실, 임희석',
+  ach:['카렌 미얀마 후원 식사','절기 감사 식사','목회자 생일 축하','식사 준비 및 설거지 봉사'],
+  chl:['봉사 부원의 부족','모든 성도들의 봉사에 대한 관심 부족','변함없이 성실하게 섬길 수 있는 봉사 체계 필요',''],
+  plans:[
+    {name:'주일예배 친교', goal:'식사 준비', actions:'전교인 식사', budget:'2000000'},
+    {name:'특별행사', goal:'창립기념일, 부활주일, 추수감사주일, 성탄주일', actions:'전교인 식사', budget:'3000000'},
+    {name:'교역사 생일 및 창립기념 축하', goal:'교역사 생일 축하 및 창립기념 축하', actions:'전교인 케잌', budget:'1000000'},
+  ]},
+
+'09|문화사역팀': {
+  leader:'신동현', subLeader:'', members:'',
+  vision:'예수님의 사랑을 영등포에 전하다',
+  values:'문화를 통한 복음 전파\n[본질], [공감], [사랑]',
+  org:'신동현 팀장\n1장년 김화경(예술감독), 2장년 진숙현(디자이너)\n1,2청년 이승수, 3청년 이반석, 고등부 장예닮',
+  ach:['분기별 행사 안정화(부활절:성가대 칸타타 / 창립기념일:어울림 문화행사 / 추수감사절:지역사회 돕기 바자회 / 성탄절:내부 행사)','지역사회 협력 강화(영등포본동주민센터)','성도분들에게 부담을 최소화하려고 노력함',''],
+  chl:['교인 및 교인지인 참여 방안 고민 필요','추수감사절과 성탄절 행사 간격이 짧아 준비 기간이 부족하였음','특정 인원에게 업무 집중 현상 발생(음향, 영상, 디자인 등)',''],
+  plans:[
+    {name:'부활절 행사', goal:'부활의 기쁨과 감사', actions:'성가대, 2세 중심의 문화행사', budget:'500000'},
+    {name:'창립기념 행사', goal:'축하와 감사, 지역과 어울림', actions:'전시와 공연 / 문화행사', budget:'2000000'},
+    {name:'추수감사절 행사', goal:'지역사회 섬기기', actions:'지역사회 돕기 바자회, 길거리 공연', budget:'1000000'},
+  ]},
+
+'10|여름수련회': {
+  leader:'박명랑', subLeader:'김선우, 신동현', members:'',
+  vision:'회복과 안식으로 채워지는 천국여행',
+  values:'성도들의 영적 회복과 깊은 안식을 위한 최상의 장소와 편의를 제공할 수 있도록 사랑과 섬김으로 봉사한다.',
+  org:'박명랑\n김선우, 신동현',
+  ach:['수련회 일정 변경(기존 8월초 → 8월 중순/공휴일 포함 일정으로 부담감 감소)','효율적인 예산 운영(참석 회비 동결 및 업체측 소통과 협의로 비용 절감)','단체 식사/섬김 감사(매년 두분 장로님의 식사 섬김으로 풍성한 교제와 쉼)','어린이 사역 지원 - 프로그램 예산 지원'],
+  chl:['참석 인원 조기 확정 필요(숙소/간식 外)','[어린이 사역] 공간 협소, 환경적 제한으로 어린이 프로그램 진행 어려움','[안전사고 예방] 인원/시간 관리 필요',''],
+  plans:[
+    {name:'장소 섭외/계약', goal:'성도들의 쉼과 회복을 위한 최적의 공간 및 편의 제공', actions:'캠프 일정 및 장소 확보\n캠프 사전 답사: 숙소/강당 외 부대시설과 시스템 점검 및 요청', budget:''},
+    {name:'간식/물품', goal:'건강하고 맛있는 먹거리로 몸과 마음에 건강 충만', actions:'유아부터 장년까지 즐길 수 있는 다양하고 신선한 먹거리 제공\n2박3일 동안 사용할 모든 물품 및 장비들을 일정과 장소에 맞게 사용할 수 있도록 준비', budget:'1300000'},
+    {name:'레크레이션/기타', goal:'웃음과 즐거움 가운데 모든 세대가 주 안에서 하나됨', actions:'퀴즈/단체게임\n모든 세대가 함께 즐기며 단합할 수 있는 게임 진행 및 선물 증정', budget:'150000'},
+  ]},
+
+'기01|1장년 남선교회': {
+  leader:'백박삼', subLeader:'박상완, 박옥수, 김영, 박준성, 정창수', members:'6명',
+  vision:'신앙의 본을 세우고, 교회의 기둥으로 섬긴다.',
+  values:'교회의 신앙적 전통과 질서를 지키며, 연약한 지체를 돌보고 다음 세대 남성 신앙의 본이 되는 선교회입니다.\n롬 8장 전절 암송',
+  org:'백박삼\n박상완, 박옥수, 김영, 박준성, 정창수',
+  ach:['교회 주요 예배 및 절기 사역 참여 - 정기예배와 주요 절기 예배에 꾸준히 참여하며 예배의 자리를 지키는 어른 선교회의 본을 세움','회원간 참여의식이 높음 - 예배봉사, 경조사역 전반에 적극적인 동참','선교회가 \'모임 중심\'이 아닌 \'사역 중심\' 공동체로 인식되기 시작함',''],
+  chl:['선교회 사역 방향과 역할이 문서화되지 않아, 신규 회원이나 후배 세대와의 연결 어려움','세대간 자연스러운 참여 확대를 위한 준비와 구조가 충분히 마련되지 못함','2장-1/2/3 남선교회와의 정기적 간담회 추진 필요',''],
+  plans:[
+    {name:'영적 사역', goal:'예배와 기도에 본이 되는 선교회', actions:'회원들의 정기예배 및 기도모임 참여를 안정적 유지\n교회 주요 절기와 특별예배에 적극 동참', budget:''},
+    {name:'봉사 및 지원 사역', goal:'질서 있고 책임 있는 섬김', actions:'교회 환경정비 및 주요 행사 지원에 지속적으로 참여\n경조사 발생 시 모범적인 참여와 절제된 섬김', budget:''},
+    {name:'세대 계승 및 연합 사역', goal:'다음 세대를 잇는 신앙 연결', actions:'2장, 1/2청 남자선교회와의 연합 또는 교류 기회 마련\n젊은 세대를 향한 신앙적 조언과 격려를 통해 믿음의 길을 함께함', budget:''},
+  ]},
+
+'기02|1장년 여선교회': {
+  leader:'박은실 회장', subLeader:'김화경 부회장, 임희석 총무', members:'15명',
+  vision:'말씀 듣고 기도하고 행동하는 삶을 살자\n매일 감사의 삶을 살자\n믿음의 어미, 섬김의 어른이 되자',
+  values:'삶과 행동으로 보여주는 어른이 되자\n공동체에서 소외되고 있는 지체를 발견하여 기도하며 공동체에 잘 소속되도록 하자\n섬김과 봉사가 늘 삶에서 표출되자',
+  org:'박은실 회장, 김화경 부회장, 임희석 총무\n서순원, 이순례, 권영숙, 박명랑, 이경연, 박혜경, 노정희\n김현숙, 이수정, 김은영, 정선화, 정은미',
+  ach:['태국 선교 식사 및 주방봉사에 긍정적임','\'25년 바자회에 적극적인 참여가 있었음','교회를 생각하며 지체들을 위한 기도가 활성화됨','2부예배 참여율이 높아짐 + 식사 교제를 즐거워함'],
+  chl:['\'25년 목표가 없어서 미진했음','소통의 어려움, 각자 맡은 바 일들의 편중으로 과부하','각 회원들의 1인 1업무 봉사와 협력 필요',''],
+  plans:[
+    {name:'1일 1감사 노트 작성', goal:'1일 1감사 노트 작성', actions:'식사 교제 시 감사한 것들을 나누기', budget:''},
+    {name:'공동체에서 소외된 성도 관찰', goal:'공동체에서 소외된 성도를 주의깊게 관찰해보자', actions:'서로 기도제목 나누기', budget:''},
+    {name:'믿음의 본이 되는 어른', goal:'믿음의 본이 되는 어른이 되자', actions:'교회 봉사, 섬김에 적극적 동참', budget:''},
+  ]},
+
+'기03|2장년 선교회': {
+  leader:'이재영', subLeader:'고강미(2-1), 최훈(2-2), 조아라(2-3)', members:'',
+  vision:'하나님이 기뻐하시는 교회를 세워가는 공동체\n하나님이 기뻐하시는 믿음의 가문을 세워가는 공동체\n성도간의 교제에 적극적으로 참여하여 하나 되는 공동체',
+  values:'가정에서 아이들을 말씀으로 양육\n가정예배를 통해 하나님을 신실하게 예배하는 자가 되도록 양육\n성도간의 효율적인 교제를 위해 소그룹으로 나누어 교제',
+  org:'이재영 (회장)\n고강미 (2-1), 최훈 (2-2), 조아라 (2-3)',
+  ach:['회장 3인 배치, 공동 운영을 통한 효율적인 공동체 운영','공동체 구성원 관리 및 모임 운영','친밀한 교제',''],
+  chl:['각 소그룹 개별 운영에 따른 차이 발생(공동체 모임 운영 방법, 회비 운영)','소그룹간 통일된 운영 기준 부족','',''],
+  plans:[
+    {name:'성도간의 친밀한 교제', goal:'성도간의 친밀한 교제 및 합심기도의 활성화', actions:'소그룹별 정기 모임 운영\n회장 3인 공동 운영을 통한 효율적인 공동체 운영', budget:''},
+    {name:'소그룹 활성화', goal:'각 셀별 활성화', actions:'2-1, 2-2, 2-3 소그룹별 자체 모임 진행\n자체 회비 운영', budget:''},
+    {name:'','goal':'','actions':'','budget':''},
+  ]},
+
+'기04|1,2청년부': {
+  leader:'이승수 회장', subLeader:'박선영 총무', members:'',
+  vision:'말씀 듣고 기도하고 행동하자',
+  values:'성령의 인도하심을 따라 사랑의 교제, 영적 성장, 하나님이 기뻐하시는 교회 생활한다\n성령의 인도하심에 순종하고 합력하여 선을 이룬다\n믿음의 모본이 되어 후배들을 신앙으로 잘 이끌어주자',
+  org:'김광수 목사\n이승수 회장, 박선영 총무\n김영주, 김유리, 오세빈, 유진',
+  ach:['정식 교인 등록 2명(오세빈 형제, 유진 자매)','기도 응답 - 육신의 질병 합심하여 기도, 치유와 평안함 경험','2026년 방콕 선교에 다수 동참하기로 결단',''],
+  chl:['공동체 모임과 단합 부족 - 회장의 잦은 출장으로 기관별 모임 참석 제한','예배 위원 및 봉사자로 섬기는 청년들이 점심식사 시간에 함께 모여 교제할 시간을 갖는데 현실적인 한계','김영주 자매의 장기 부재',''],
+  plans:[
+    {name:'모임 구조 개선', goal:'주일 외에 식사, 교제, 티타임', actions:'정기적인 소그룹 모임 및 식사 교제', budget:''},
+    {name:'심방 및 케어', goal:'장기결석자 및 출장이 잦은 공동체를 위해 찾아가 소속감 강화', actions:'장기결석자 심방 및 연락\n출장 중인 공동체원과의 소통 강화', budget:''},
+    {name:'선교 준비', goal:'2026년 방콕 선교를 철저히 준비', actions:'방콕 선교 준비 모임 및 기도\n선교 후원 활동', budget:''},
+  ]},
+
+'기05|3청년부': {
+  leader:'이반석 회장', subLeader:'', members:'',
+  vision:'말씀 읽고 기도하고 행동하는 공동체',
+  values:'모든 구성원이 주체적인 신앙인으로서 바로 선다\n교회의 지체로서 교회가 추구하는 신앙을 함께 따라간다\n세상에 나아가서도 그리스도인의 삶을 살 수 있도록 교육 및 훈련받는다',
+  org:'박경애 목사님\n이반석 회장\n김현지, 최규태, 박재영, 박예희, 노경은, 최영욱, 정의빈',
+  ach:['새가족 등록 3인(박예희, 최영욱, 정의빈)','매일 암송과 바이블타임','매주 3청년 임원진 기도 모임 - NGC 예배 기틀 마련',''],
+  chl:['공동체 활동에 대한 적극성이 아직은 아쉬움','기관장과 회장이 대예배에 참석하지 못함','기도짝 시스템 도입 필요 - 매달 기관별 모임마다 새로운 기도짝 매칭으로 공동체원간 유대감 형성',''],
+  plans:[
+    {name:'기관별 모임(생일 축하)', goal:'공동체의 단합 및 축하', actions:'매월 기관별 모임에 생일자들을 축하', budget:'360000'},
+    {name:'기도짝 시스템 운영', goal:'기도짝 시스템 운영', actions:'월 단위 기도짝 선정 후 기도', budget:''},
+    {name:'매일 암송 및 바이블타임', goal:'매일 암송과 바이블타임 정착', actions:'개인 암송 및 바이블타임 장려', budget:''},
+  ]},
+
+'기06|NGC': {
+  leader:'이반석 간사', subLeader:'', members:'',
+  vision:'다음 세대를 구체적으로 준비하는 교회',
+  values:'\'예배\'의 본질을 잃지 않으면서 다음 세대에게 맞는 예배를 만들어가는 것\n다음 세대의 리더십 훈련',
+  org:'김광수 목사, 이광선 목사\n이반석 간사\n찬양팀, 공간구성팀, 조명팀, 음향팀, 기도팀, 회계팀, 굿즈팀, 안내팀',
+  ach:['\'25년 1월, 4회차 예배 진행','매 회차 12명 이상의 다음 세대의 팀 신청','다음 세대의 예배 만족도: 중상','\'주님이 꿈꾸시는 교회\'와의 연합'],
+  chl:['다음 세대만의 예배 및 모임의 횟수 부족','매 회 바뀌는 팀 구성, 미흡한 체계/숙련도 - 반기 혹은 일년 단위로 팀 구성 계획','',''],
+  plans:[
+    {name:'NGC 소모임(연8회)', goal:'다음 세대의 유대 및 훈련(대상: 청소년~청년)', actions:'다음 세대들의 모임 및 예배\n8회×간식비 10만원', budget:'800000'},
+    {name:'NGC 워십(연4회)', goal:'NGC 팀 자체적 예배 훈련 및 준비(대상: 전연령)', actions:'NGC 워십 준비를 위한 4-5회 미팅\n팀 미팅 5회×식비 15만원\n예배 당일 간식비 10만원', budget:'3400000'},
+    {name:'기타 지출', goal:'NGC 워십 준비를 위해 필요한 물품 구비', actions:'NGC 워십에 필요한 자재 및 장비 구입\n자재비 20만원 + 장비비 20만원', budget:'400000'},
+  ]},
+
+'11|문서사역팀': {
+  leader:'(팀장 미정)', subLeader:'', members:'',
+  vision:'말씀과 사역의 기록을 통해 교회의 이야기를 세상에 전한다',
+  values:'정확하고 풍성한 글로 교회의 이야기를 담는다\n소식지와 주보를 통해 성도 간 소통의 다리가 된다\n기록을 통해 하나님의 일하심을 증거하고 보존한다',
+  org:'팀장\n주보 편집 담당, 소식지 제작 담당, 블로그·SNS 담당',
+  ach:['주보 편집 정기 발행 안정화','교회 소식지 분기별 발행 진행','교회 행사 사진 기록 및 보관 체계화',''],
+  chl:['팀원 부족으로 업무 집중 현상 발생','블로그·SNS 콘텐츠 정기 발행 미흡','사진 아카이빙 체계 미흡 — 장기 보관 기준 필요',''],
+  plans:[
+    {name:'주보 편집', goal:'매주 질 높은 주보 발행', actions:'주보 편집 및 인쇄 관리\n디자인 표준화 작업', budget:'500000'},
+    {name:'소식지 발행', goal:'분기별 소식지 발행', actions:'분기 1회 소식지 제작 및 배포', budget:'300000'},
+    {name:'블로그·SNS 운영', goal:'교회 온라인 콘텐츠 활성화', actions:'교회 블로그 주 1회 업데이트\n인스타그램·SNS 주 2회 게시', budget:''},
+  ]},
+
+'12|방송사역팀': {
+  leader:'(팀장 미정)', subLeader:'', members:'',
+  vision:'예배의 감동이 화면을 통해 더 많은 사람에게 전해지다',
+  values:'예배를 섬기는 마음으로 최선의 방송 환경을 제공한다\n영상과 음향으로 예배의 집중도를 높인다\n온라인 중계를 통해 교회 밖 성도들을 섬긴다',
+  org:'팀장\n영상 촬영 담당, 음향 담당, 유튜브 업로드 담당',
+  ach:['주일예배 영상 촬영 및 유튜브 업로드 정기화','음향 장비 운영 안정화','예배 중계 화질 및 음질 개선',''],
+  chl:['방송 담당 인원 부족으로 주번 부담 과중','음향 장비 노후화 대비 필요','유튜브 채널 홍보 및 구독자 확대 노력 부족',''],
+  plans:[
+    {name:'주일예배 촬영·중계', goal:'매 주일 안정적인 예배 영상 촬영 및 유튜브 업로드', actions:'예배 영상 촬영 및 편집\n유튜브 채널 업로드 및 관리', budget:''},
+    {name:'장비 점검 및 유지', goal:'방송 장비 정기 점검 및 유지보수', actions:'분기별 장비 점검\n노후 장비 교체 검토', budget:'500000'},
+    {name:'방송팀 인원 확충', goal:'봉사자 충원 및 교육', actions:'신규 봉사자 모집 및 교육 진행\n주번 체계 안정화', budget:''},
+  ]},
+
+'13|미디어사역팀': {
+  leader:'(팀장 미정)', subLeader:'', members:'',
+  vision:'디지털 세상에서 복음의 빛을 비추는 사역',
+  values:'SNS와 디지털 채널을 통해 교회의 사역을 알린다\n온라인으로 연결되는 교회 공동체를 만든다\n창의적인 콘텐츠로 세상과 소통하며 복음을 전한다',
+  org:'팀장\nSNS 운영 담당, 카카오채널 담당, 영상 콘텐츠 담당',
+  ach:['카카오톡 채널 운영 안정화 및 성도 공지 기능 정착','교회 주요 행사 온라인 홍보 진행','성도 대상 디지털 소통 채널 확대',''],
+  chl:['온라인 콘텐츠 기획 및 제작 인력 부족','SNS 정기 게시 미흡 — 콘텐츠 캘린더 부재','미디어 사역 역할과 범위 명확화 필요',''],
+  plans:[
+    {name:'SNS 채널 운영', goal:'교회 SNS 채널 활성화', actions:'인스타그램·카카오채널 정기 운영\n주요 사역 콘텐츠 제작 및 게시', budget:''},
+    {name:'행사 온라인 홍보', goal:'교회 주요 행사 온라인 홍보', actions:'행사 홍보 카드뉴스·포스터 제작\n디지털 채널 통한 배포', budget:'300000'},
+    {name:'미디어 사역 체계화', goal:'미디어 사역 매뉴얼 작성 및 역할 정립', actions:'사역 범위 및 역할 분담 문서화\n매뉴얼 작성 후 팀원 공유', budget:''},
+  ]},
+};
+
+// ────────────────────────────────────────────
+// 부서 선택 시 데이터 채우기
+// ────────────────────────────────────────────
+function onDeptChange() {
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('error-box').classList.remove('show');
+
+  const key = document.getElementById('dept-select').value;
+  if (!key) return;
+
+  const d = DEPT_DATA[key];
+  if (!d) return;
+
+  const set = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val || '';
+  };
+
+  set('leader',     d.leader);
+  set('sub-leader', d.subLeader);
+  set('members',    d.members);
+  set('vision',     d.vision);
+  set('values',     d.values);
+  set('org',        d.org);
+
+  set('ach1', d.ach[0]);
+  set('ach2', d.ach[1]);
+  set('ach3', d.ach[2]);
+  set('ach4', d.ach[3]);
+
+  set('chl1', d.chl[0]);
+  set('chl2', d.chl[1]);
+  set('chl3', d.chl[2]);
+  set('chl4', d.chl[3]);
+
+  const pp = d.plans;
+  set('p1name', pp[0]?.name);  set('p1goal', pp[0]?.goal);
+  set('p1act',  pp[0]?.actions); set('p1bud', pp[0]?.budget);
+  set('p2name', pp[1]?.name);  set('p2goal', pp[1]?.goal);
+  set('p2act',  pp[1]?.actions); set('p2bud', pp[1]?.budget);
+  set('p3name', pp[2]?.name);  set('p3goal', pp[2]?.goal);
+  set('p3act',  pp[2]?.actions); set('p3bud', pp[2]?.budget);
+
+  // 데이터 있는 사역만 자동 펼치기
+  const b2 = document.getElementById('plan-box-2');
+  const b3 = document.getElementById('plan-box-3');
+  if (pp[1]?.name) { b2.classList.remove('collapsed'); b2.classList.add('open'); }
+  else             { b2.classList.add('collapsed'); b2.classList.remove('open'); }
+  if (pp[2]?.name) { b3.classList.remove('collapsed'); b3.classList.add('open'); }
+  else             { b3.classList.add('collapsed'); b3.classList.remove('open'); }
+}
+
+
+// ────────────────────────────────────────────
+// 데이터 수집
+// ────────────────────────────────────────────
+function collectData() {
+  const sel = v('dept-select');
+  if (!sel) return null;
+  const [no, dept] = sel.split('|');
+
+  const values = v('values').split('\n').map(s=>s.trim()).filter(Boolean);
+  const achievements = [v('ach1'),v('ach2'),v('ach3'),v('ach4')].filter(Boolean);
+  const challenges   = [v('chl1'),v('chl2'),v('chl3'),v('chl4')].filter(Boolean);
+
+  const plans = [
+    {name:v('p1name'), goal:v('p1goal'), actions:v('p1act'), budget:v('p1bud')},
+    {name:v('p2name'), goal:v('p2goal'), actions:v('p2act'), budget:v('p2bud')},
+    {name:v('p3name'), goal:v('p3goal'), actions:v('p3act'), budget:v('p3bud')},
+  ].filter(p => p.name);
+
+  return {
+    no, dept,
+    leader: v('leader'), subLeader: v('sub-leader'), members: v('members'),
+    vision: v('vision'), values, org: v('org'),
+    achievements, challenges, plans, note: v('note')
+  };
+}
+
+// ────────────────────────────────────────────
+// 유효성 검사
+// ────────────────────────────────────────────
+function validate(d) {
+  if (!d) return '부서 / 기관을 선택해 주세요.';
+  if (!d.leader) return '부서장 성명을 입력해 주세요.';
+  if (!d.vision) return '부서 비전 / 표어를 입력해 주세요.';
+  if (!d.values.length) return '부서 핵심가치 및 목표를 입력해 주세요.';
+  if (!d.achievements.length) return '잘된 점을 최소 1개 이상 입력해 주세요.';
+  if (!d.challenges.length) return '아쉬운 점을 최소 1개 이상 입력해 주세요.';
+  if (!d.plans.length) return '핵심사역을 최소 1개 이상 입력해 주세요.';
+  return null;
+}
+
+// ────────────────────────────────────────────
+// 조직도 파싱
+// ────────────────────────────────────────────
+function parseOrg(text) {
+  if (!text || !text.trim()) return [];
+  return text.split('\n')
+    .map(line => line.trim()).filter(Boolean)
+    .map(line => line.split(',').map(s => s.trim()).filter(Boolean));
+}
+
+// ────────────────────────────────────────────
+// PPT 헬퍼
+// ────────────────────────────────────────────
+// ────────────────────────────────────────────
+// ⚙️ EmailJS 설정 (아래 3줄 입력 필요)
+// ────────────────────────────────────────────
+const EMAILJS_PUBLIC_KEY  = 'e5WHDTiyZ4KB-gFAb62Cn';   // EmailJS → Account → Public Key
+const EMAILJS_SERVICE_ID  = 'service_bx66qno';   // EmailJS → Email Services → Service ID
+const EMAILJS_TEMPLATE_ID = 'template_x0tbaw8';  // EmailJS → Email Templates → Template ID
+const NOTIFY_EMAIL        = 'sjowon@kakao.com'; // 알림 받을 담당자 이메일
+
+// EmailJS 초기화
+if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+  try { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
+  catch(e) { console.warn('EmailJS init skip:', e); }
+}
+
+const COLORS = {
+  BROWN:'6B3A1C', MOCHA:'8C6E63', GREEN:'A0DD8D',
+  GRAYH:'F0F0F0', BLUEGR:'CDD1DA', TITLE:'333333',
+  SUB:'969696', TEXT:'222222', WHITE:'FFFFFF',
+  ORGBOX:'555555', LINE:'BBBBBB'
+};
+
+function addHeader(slide, section) {
+  slide.addText('2026년 사랑과평안의교회 상반기 결산보고', {
+    x:C(0.85), y:C(0.45), w:C(24), h:C(1.0),
+    fontSize:24, bold:true, color:COLORS.TITLE, fontFace:'Malgun Gothic', valign:'middle'
+  });
+  slide.addText(section, {
+    x:C(23.0), y:C(0.72), w:C(10.0), h:C(0.6),
+    fontSize:12, color:COLORS.SUB, fontFace:'Malgun Gothic', align:'right', valign:'middle'
+  });
+  slide.addShape('rect', {x:C(0.85), y:C(1.78), w:C(32.15), h:C(0.025),
+    fill:{color:COLORS.LINE}, line:{color:COLORS.LINE, width:0}});
+}
+
+function addDeptTitle(slide, d) {
+  slide.addText(d.no + '  ' + d.dept, {
+    x:C(0.85), y:C(2.45), w:C(26), h:C(1.2),
+    fontSize:30, bold:true, color:COLORS.BROWN, fontFace:'Malgun Gothic', valign:'middle'
+  });
+}
+
+function addFooter(slide, pg) {
+  slide.addText(pg + '/62', {
+    x:C(30.5), y:C(18.45), w:C(2.8), h:C(0.4),
+    fontSize:8, color:COLORS.SUB, fontFace:'Malgun Gothic', align:'right'
+  });
+}
+
+function L(slide, x1, y1, x2, y2) {
+  const isH = Math.abs(y2-y1) < 0.001;
+  slide.addShape('line', {
+    x:Math.min(x1,x2), y:Math.min(y1,y2),
+    w: isH ? Math.abs(x2-x1) : 0,
+    h: isH ? 0 : Math.abs(y2-y1),
+    line:{color:'888888', width:0.75}
+  });
+}
+
+// ────────────────────────────────────────────
+// 조직도 그리기
+// ────────────────────────────────────────────
+function drawOrgChart(slide, orgText, BL, BT, BW, BH) {
+  const levels = parseOrg(orgText);
+  if (!levels.length) {
+    slide.addText('조직도를 입력해 주세요.', {
+      x:BL+C(0.5), y:BT+C(2), w:BW-C(1), h:C(2),
+      fontSize:12, color:COLORS.SUB, fontFace:'Malgun Gothic', align:'center', valign:'middle'
+    });
+    return;
+  }
+
+  const pX=C(0.6), pY=C(1.0);
+  const aL=BL+pX, aT=BT+pY, aW=BW-2*pX, aH=BH-2*pY;
+  const n=levels.length, bH=C(1.25);
+  const vGap = n>1 ? (aH-n*bH)/(n-1) : 0;
+  const allPos=[];
+
+  for (let lv=0;lv<n;lv++) {
+    const items=levels[lv], m=items.length;
+    const bW=Math.min(C(4.5), (aW-(m-1)*C(0.5))/m);
+    const totW=m*bW+(m-1)*C(0.5);
+    const sL=aL+(aW-totW)/2, rT=aT+lv*(bH+vGap);
+    const rp=[];
+    for (let k=0;k<m;k++) {
+      const bl=sL+k*(bW+C(0.5)), bt=rT;
+      slide.addShape('roundRect', {x:bl,y:bt,w:bW,h:bH,arcSize:15,
+        fill:{color:COLORS.WHITE}, line:{color:COLORS.ORGBOX,width:1.25}});
+      slide.addText(items[k], {x:bl,y:bt,w:bW,h:bH,
+        fontSize:13,bold:true,color:'333333',fontFace:'Malgun Gothic',align:'center',valign:'middle'});
+      rp.push({cx:bl+bW/2, top:bt, bottom:bt+bH});
+    }
+    allPos.push(rp);
+  }
+
+  for (let lv=0;lv<n-1;lv++) {
+    const par=allPos[lv], chi=allPos[lv+1];
+    const pCx=par.length===1?par[0].cx:(par[0].cx+par[par.length-1].cx)/2;
+    const pBt=par[0].bottom, cTo=chi[0].top, midY=(pBt+cTo)/2;
+    L(slide,pCx,pBt,pCx,midY);
+    if (chi.length>1) L(slide,chi[0].cx,midY,chi[chi.length-1].cx,midY);
+    chi.forEach(c=>L(slide,c.cx,midY,c.cx,cTo));
+  }
+}
+
+// ────────────────────────────────────────────
+// 슬라이드 1: 부서 소개
+// ────────────────────────────────────────────
+function buildSlide1(pres, d) {
+  const sl = pres.addSlide();
+  sl.background = {color:COLORS.WHITE};
+  addHeader(sl, '부서 소개');
+  addDeptTitle(sl, d);
+
+  // 비전 헤더
+  sl.addShape('rect',{x:C(0.95),y:C(4.95),w:C(15.2),h:C(1.35),fill:{color:COLORS.BROWN},line:{width:0}});
+  sl.addText('부서 비전 / 표어',{x:C(0.95),y:C(4.95),w:C(15.2),h:C(1.35),
+    fontSize:15,bold:true,color:COLORS.WHITE,fontFace:'Malgun Gothic',align:'center',valign:'middle'});
+  // 비전 본문
+  sl.addShape('rect',{x:C(0.95),y:C(6.30),w:C(15.2),h:C(3.0),fill:{color:COLORS.WHITE},line:{color:COLORS.BROWN,width:1.5}});
+  sl.addText(d.vision,{x:C(0.95),y:C(6.30),w:C(15.2),h:C(3.0),
+    fontSize:14,color:COLORS.TEXT,fontFace:'Malgun Gothic',align:'center',valign:'middle',paraSpaceAfter:6});
+
+  // 핵심가치 헤더
+  sl.addShape('rect',{x:C(0.95),y:C(9.75),w:C(15.2),h:C(1.35),fill:{color:COLORS.BROWN},line:{width:0}});
+  sl.addText('부서 핵심가치 및 목표',{x:C(0.95),y:C(9.75),w:C(15.2),h:C(1.35),
+    fontSize:15,bold:true,color:COLORS.WHITE,fontFace:'Malgun Gothic',align:'center',valign:'middle'});
+  // 핵심가치 본문
+  sl.addShape('rect',{x:C(0.95),y:C(11.10),w:C(15.2),h:C(3.7),fill:{color:COLORS.WHITE},line:{color:COLORS.BROWN,width:1.5}});
+  const valStr = d.values.map(v=>'·  '+v).join('\n');
+  sl.addText(valStr,{x:C(1.2),y:C(11.10),w:C(14.7),h:C(3.7),
+    fontSize:14,color:COLORS.TEXT,fontFace:'Malgun Gothic',valign:'middle',paraSpaceAfter:8});
+
+  // 조직도 헤더
+  sl.addShape('rect',{x:C(16.85),y:C(4.95),w:C(16.05),h:C(1.35),fill:{color:COLORS.GREEN},line:{width:0}});
+  sl.addText('조직도',{x:C(16.85),y:C(4.95),w:C(16.05),h:C(1.35),
+    fontSize:15,bold:true,color:'2A4A1E',fontFace:'Malgun Gothic',align:'center',valign:'middle'});
+  // 조직도 본문 테두리
+  sl.addShape('rect',{x:C(16.85),y:C(6.30),w:C(16.05),h:C(8.5),fill:{color:COLORS.WHITE},line:{color:COLORS.BROWN,width:1.5}});
+  // 조직도 트리
+  drawOrgChart(sl, d.org, C(16.85), C(6.30), C(16.05), C(8.5));
+
+  addFooter(sl,'5');
+}
+
+// ────────────────────────────────────────────
+// 슬라이드 2: 2026 상반기 결산
+// ────────────────────────────────────────────
+function buildSlide2(pres, d) {
+  const sl = pres.addSlide();
+  sl.background = {color:COLORS.WHITE};
+  addHeader(sl,'2026년 상반기 사역결산');
+  addDeptTitle(sl,d);
+
+  // 좌: 감사와 성과
+  sl.addShape('rect',{x:C(0.95),y:C(4.95),w:C(15.4),h:C(1.2),fill:{color:COLORS.GRAYH},line:{width:0}});
+  sl.addText('감사와 성과 (잘된 점)',{x:C(0.95),y:C(4.95),w:C(15.4),h:C(1.2),
+    fontSize:15,bold:true,color:COLORS.TEXT,fontFace:'Malgun Gothic',align:'center',valign:'middle'});
+  sl.addShape('rect',{x:C(0.95),y:C(6.15),w:C(15.4),h:C(8.65),fill:{color:COLORS.WHITE},line:{color:COLORS.BROWN,width:1.5}});
+  const achStr = d.achievements.map((a,i)=>(i+1)+'.  '+a).join('\n');
+  sl.addText(achStr,{x:C(1.2),y:C(6.15),w:C(14.9),h:C(8.65),
+    fontSize:14,color:COLORS.TEXT,fontFace:'Malgun Gothic',valign:'middle',paraSpaceAfter:12});
+
+  // 우: 아쉬움과 과제
+  sl.addShape('rect',{x:C(16.65),y:C(4.95),w:C(16.25),h:C(1.2),fill:{color:COLORS.GRAYH},line:{width:0}});
+  sl.addText('아쉬움과 과제 (보완점)',{x:C(16.65),y:C(4.95),w:C(16.25),h:C(1.2),
+    fontSize:15,bold:true,color:COLORS.TEXT,fontFace:'Malgun Gothic',align:'center',valign:'middle'});
+  sl.addShape('rect',{x:C(16.65),y:C(6.15),w:C(16.25),h:C(8.65),fill:{color:COLORS.WHITE},line:{color:COLORS.BROWN,width:1.5}});
+  const chlStr = d.challenges.map((c,i)=>(i+1)+'.  '+c).join('\n');
+  sl.addText(chlStr,{x:C(16.9),y:C(6.15),w:C(15.8),h:C(8.65),
+    fontSize:14,color:COLORS.TEXT,fontFace:'Malgun Gothic',valign:'middle',paraSpaceAfter:12});
+
+  addFooter(sl,'6');
+}
+
+// ────────────────────────────────────────────
+// 슬라이드 3: 2026 계획·예산
+// ────────────────────────────────────────────
+function buildSlide3(pres, d) {
+  const sl = pres.addSlide();
+  sl.background = {color:COLORS.WHITE};
+  addHeader(sl,'2026년 하반기 사역계획 및 예산');
+  addDeptTitle(sl,d);
+
+  const TX=C(0.95), TW=C(31.95);
+  const CW=[TW*0.155, TW*0.275, TW*0.345, TW*0.225];
+  const CX=[TX, TX+CW[0], TX+CW[0]+CW[1], TX+CW[0]+CW[1]+CW[2]];
+  const HDR=['구분','실행 목표','주요 활동','예산(안)'];
+  const TOP=C(4.95), HEADH=C(1.35), ROWH=C(2.5);
+
+  // 헤더
+  for (let i=0;i<4;i++) {
+    sl.addShape('rect',{x:CX[i],y:TOP,w:CW[i],h:HEADH,fill:{color:COLORS.MOCHA},line:{width:0}});
+    sl.addText(HDR[i],{x:CX[i],y:TOP,w:CW[i],h:HEADH,
+      fontSize:15,bold:true,color:COLORS.WHITE,fontFace:'Malgun Gothic',align:'center',valign:'middle'});
+  }
+
+  // 데이터 행
+  let y=TOP+HEADH;
+  const rows=d.plans;
+  rows.forEach((row,r) => {
+    const fill=r%2===0?COLORS.BLUEGR:COLORS.WHITE;
+    const cols=[row.name, row.goal, row.actions, row.budget||'-'];
+    for (let c=0;c<4;c++) {
+      sl.addShape('rect',{x:CX[c],y,w:CW[c],h:ROWH,fill:{color:fill},line:{width:0}});
+      sl.addText(cols[c]||'-',{x:CX[c]+C(0.2),y,w:CW[c]-C(0.4),h:ROWH,
+        fontSize:c===0?14:13, bold:c===0,
+        color:COLORS.TEXT, fontFace:'Malgun Gothic',
+        align:'center', valign:'middle', paraSpaceAfter:4});
+    }
+    y+=ROWH;
+  });
+
+  // 합계
+  let total=0;
+  rows.forEach(r=>{const n=parseInt(String(r.budget||'0').replace(/[^0-9]/g,''));if(!isNaN(n))total+=n;});
+  const totalStr=total>0?total.toLocaleString():'-';
+
+  sl.addShape('rect',{x:CX[0],y,w:CW[0]+CW[1]+CW[2],h:C(1.3),fill:{color:COLORS.GRAYH},line:{width:0}});
+  sl.addText('합  계',{x:CX[0],y,w:CW[0]+CW[1]+CW[2],h:C(1.3),
+    fontSize:17,bold:true,color:COLORS.TEXT,fontFace:'Malgun Gothic',align:'center',valign:'middle'});
+  sl.addShape('rect',{x:CX[3],y,w:CW[3],h:C(1.3),fill:{color:COLORS.GRAYH},line:{width:0}});
+  sl.addText(totalStr,{x:CX[3],y,w:CW[3],h:C(1.3),
+    fontSize:16,bold:true,color:COLORS.TEXT,fontFace:'Malgun Gothic',align:'center',valign:'middle'});
+
+  if (d.note) {
+    sl.addText('※  '+d.note,{x:C(0.95),y:y+C(1.5),w:C(31.95),h:C(0.5),
+      fontSize:9,color:COLORS.SUB,fontFace:'Malgun Gothic',italic:true});
+  }
+  addFooter(sl,'9');
+}
+
+// ────────────────────────────────────────────
+// 메인 생성 함수
+// ────────────────────────────────────────────
+
+// ────────────────────────────────────────────
+// 이메일 전송
+// ────────────────────────────────────────────
+async function sendEmailNotification(d) {
+  if (!EMAILJS_PUBLIC_KEY || EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') return;
+
+  const planStr = d.plans.map((p, i) =>
+    `${i+1}. [${p.name}] 목표: ${p.goal} / 활동: ${p.actions} / 예산: ${p.budget||'없음'}원`
+  ).join('\n');
+
+  const params = {
+    dept_name    : d.no + ' ' + d.dept,
+    leader       : d.leader + (d.subLeader ? ' / 차장: ' + d.subLeader : ''),
+    submitted_at : new Date().toLocaleString('ko-KR', {timeZone:'Asia/Seoul'}),
+    vision       : d.vision,
+    values       : d.values,
+    achievements : d.achievements.filter(Boolean).map((a,i)=>`${i+1}. ${a}`).join('\n'),
+    challenges   : d.challenges.filter(Boolean).map((c,i)=>`${i+1}. ${c}`).join('\n'),
+    plans        : planStr,
+  };
+
+  await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+  console.log('이메일 전송 완료');
+}
+
+async function generatePPT() {
+  const errBox = document.getElementById('error-box');
+  const result = document.getElementById('result');
+  const loading = document.getElementById('loading');
+  const btn = document.getElementById('gen-btn');
+
+  errBox.classList.remove('show');
+  result.classList.remove('show');
+
+  const d = collectData();
+  const err = validate(d);
+  if (err) { errBox.textContent = '⚠️  ' + err; errBox.classList.add('show'); return; }
+
+  btn.disabled = true;
+  loading.classList.add('show');
+
+  try {
+    await new Promise(res => setTimeout(res, 100)); // UI 렌더 여유
+
+    const pres = new PptxGenJS();
+    pres.defineLayout({name:'WIDE', width:13.33, height:7.5});
+    pres.layout = 'WIDE';
+
+    buildSlide1(pres, d);
+    buildSlide2(pres, d);
+    buildSlide3(pres, d);
+
+    const fileName = d.no + '_' + d.dept + '_2026상반기결산보고.pptx';
+    await pres.writeFile({fileName});
+
+    // ── 이메일 전송 ──────────────────────────
+    let emailSent = false;
+    if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+      try {
+        const achText = d.achievements.filter(Boolean).map((a,i)=>`${i+1}. ${a}`).join('\n');
+        const chlText = d.challenges.filter(Boolean).map((c,i)=>`${i+1}. ${c}`).join('\n');
+        const planText = d.plans.map((p,i)=>
+          `${i+1}. [${p.name}]\n   목표: ${p.goal}\n   활동: ${p.actions}\n   예산: ${p.budget||'-'}원`
+        ).join('\n\n');
+
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          to_email:    NOTIFY_EMAIL,
+          dept_name:   d.no + ' ' + d.dept,
+          leader:      d.leader,
+          sub_leader:  d.subLeader || '(없음)',
+          members:     d.members || '(미입력)',
+          submit_time: new Date().toLocaleString('ko-KR', {timeZone:'Asia/Seoul'}),
+          vision:      d.vision,
+          values:      d.values,
+          org:         d.org,
+          achievements: achText,
+          challenges:   chlText,
+          plans:        planText,
+          note:         d.note || '(없음)',
+        });
+        emailSent = true;
+      } catch(emailErr) {
+        console.warn('이메일 전송 실패 (PPT는 정상 생성됨):', emailErr);
+      }
+    }
+
+    const emailNote = emailSent ? ' · 제출 알림 이메일 발송 완료' : '';
+    document.getElementById('result-text').textContent = `${d.dept} PPT 파일이 생성되었습니다!${emailNote}`;
+    result.classList.add('show');
+  } catch(e) {
+    errBox.textContent = '❌ 오류가 발생했습니다: ' + e.message;
+    errBox.classList.add('show');
+    console.error(e);
+  } finally {
+    btn.disabled = false;
+    loading.classList.remove('show');
+  }
+}
+</script>
+</body>
+</html>
