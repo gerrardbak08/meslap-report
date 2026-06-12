@@ -750,20 +750,31 @@ async function submitFinal() {
     buildSlide2(pres,d);
     buildSlide3(pres,d);
     const fileName=d.no+'_'+d.dept+'_2026상반기결산보고.pptx';
-    await pres.writeFile({fileName});
+    // PPT를 1회 생성해 ① 본인 다운로드 + ② 드라이브 업로드 + 이메일에 재사용
+    const base64=await pres.write({outputType:'base64'});
+    await pres.writeFile({fileName});               // ① 본인 기기 다운로드
     const resultText=document.getElementById('preview-result-text');
     result.style.display='block';
-    // 이메일 발송 결과를 기다린 뒤, 실패하면 부서장에게 명확히 알린다 (조용한 실패 방지)
-    try {
-      const emailed=await sendEmailNotification(d);
-      if(emailed){
-        resultText.textContent=`${d.dept} PPT 파일이 다운로드되고, 담당자에게 제출 알림이 전송되었습니다!`;
-      } else {
-        resultText.textContent=`${d.dept} PPT 파일이 다운로드되었습니다. (이메일 알림은 설정되지 않아 발송되지 않았습니다)`;
-      }
-    } catch(emailErr){
-      console.warn('이메일 전송 실패:',emailErr);
-      resultText.innerHTML=`${d.dept} PPT 파일은 다운로드되었습니다.<br><strong style="color:#B3261E">⚠️ 담당자 자동 알림 이메일 전송에 실패했습니다. 다운로드된 PPT 파일을 담당자에게 직접 보내주세요.</strong>`;
+
+    // ② 구글 드라이브 폴더에 PPT 저장 (담당자가 한곳에서 수령) — 실패 시 명확히 경고
+    let driveOk=false, driveErr=null;
+    try { driveOk=await uploadToDrive(d, fileName, base64); }
+    catch(e){ driveErr=e; console.warn('드라이브 업로드 실패:',e); }
+
+    // 이메일 텍스트 알림(보조) — 실패해도 드라이브가 본 채널이라 치명적이지 않음
+    let emailed=false;
+    try { emailed=await sendEmailNotification(d); }
+    catch(emailErr){ console.warn('이메일 전송 실패:',emailErr); }
+
+    // 결과 메시지 구성
+    if(driveOk){
+      resultText.innerHTML=`✅ <strong>${d.dept}</strong> 제출 완료!<br>`+
+        `· PPT 파일이 본인 기기에 다운로드되었습니다<br>`+
+        `· 담당자 자료함(구글 드라이브)에 정상 접수되었습니다`+
+        (emailed?`<br>· 담당자에게 제출 알림 메일이 발송되었습니다`:``);
+    } else {
+      resultText.innerHTML=`${d.dept} PPT 파일은 본인 기기에 다운로드되었습니다.<br>`+
+        `<strong style="color:#B3261E">⚠️ 담당자 자료함 접수에 실패했습니다. 다운로드된 PPT 파일을 담당자에게 직접 보내주세요.</strong>`;
     }
   } catch(e){
     alert('오류: '+e.message);
@@ -1168,6 +1179,29 @@ const EMAILJS_PUBLIC_KEY  = 'oGDWqI0y7R7zDPUST';   // EmailJS → Account → Pu
 const EMAILJS_SERVICE_ID  = 'service_4y66egc';    // EmailJS → Email Services → Service ID
 const EMAILJS_TEMPLATE_ID = 'template_9jgv0vo';   // EmailJS → Email Templates → Template ID
 const NOTIFY_EMAIL        = 'sjowon@kakao.com'; // 알림 받을 담당자 이메일
+
+// 📁 구글 드라이브 수집 창구 (Apps Script 웹앱 URL) — PPT를 담당자 드라이브 폴더에 저장
+const DRIVE_UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbyvPFuHayTuDE5JP0i3redH_RDES76cUvOaTIkZ4yFdvygYt4Q7lnkJ6UtAS2u1jQmbBQ/exec';
+
+// PPT(base64)를 구글 드라이브 폴더에 업로드. 반환: true=성공 / throw=실패
+async function uploadToDrive(d, fileName, base64) {
+  if (!DRIVE_UPLOAD_URL || DRIVE_UPLOAD_URL.indexOf('script.google.com') < 0)
+    throw new Error('드라이브 업로드 URL이 설정되지 않았습니다');
+  const res = await fetch(DRIVE_UPLOAD_URL, {
+    method: 'POST',
+    // text/plain → CORS preflight 회피 (Apps Script 웹앱 호출 표준 패턴)
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({
+      fileName: fileName,
+      dept: d.no + ' ' + d.dept,
+      leader: d.leader,
+      base64: base64,
+    }),
+  });
+  const out = await res.json();
+  if (!out || !out.ok) throw new Error((out && out.error) || '드라이브 저장 실패');
+  return true;
+}
 
 // EmailJS 초기화
 if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
