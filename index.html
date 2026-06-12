@@ -751,9 +751,20 @@ async function submitFinal() {
     buildSlide3(pres,d);
     const fileName=d.no+'_'+d.dept+'_2026상반기결산보고.pptx';
     await pres.writeFile({fileName});
-    document.getElementById('preview-result-text').textContent=`${d.dept} PPT 파일이 다운로드 됩니다!`;
+    const resultText=document.getElementById('preview-result-text');
     result.style.display='block';
-    sendEmailNotification(d).catch(e=>console.warn('이메일 전송 실패:',e));
+    // 이메일 발송 결과를 기다린 뒤, 실패하면 부서장에게 명확히 알린다 (조용한 실패 방지)
+    try {
+      const emailed=await sendEmailNotification(d);
+      if(emailed){
+        resultText.textContent=`${d.dept} PPT 파일이 다운로드되고, 담당자에게 제출 알림이 전송되었습니다!`;
+      } else {
+        resultText.textContent=`${d.dept} PPT 파일이 다운로드되었습니다. (이메일 알림은 설정되지 않아 발송되지 않았습니다)`;
+      }
+    } catch(emailErr){
+      console.warn('이메일 전송 실패:',emailErr);
+      resultText.innerHTML=`${d.dept} PPT 파일은 다운로드되었습니다.<br><strong style="color:#B3261E">⚠️ 담당자 자동 알림 이메일 전송에 실패했습니다. 다운로드된 PPT 파일을 담당자에게 직접 보내주세요.</strong>`;
+    }
   } catch(e){
     alert('오류: '+e.message);
   } finally {
@@ -1153,9 +1164,9 @@ function parseOrg(text) {
 // ────────────────────────────────────────────
 // ⚙️ EmailJS 설정 (아래 3줄 입력 필요)
 // ────────────────────────────────────────────
-const EMAILJS_PUBLIC_KEY  = 'e5WHDTiyZ4KB-gFAb62Cn';   // EmailJS → Account → Public Key
-const EMAILJS_SERVICE_ID  = 'service_bx66qno';   // EmailJS → Email Services → Service ID
-const EMAILJS_TEMPLATE_ID = 'template_x0tbaw8';  // EmailJS → Email Templates → Template ID
+const EMAILJS_PUBLIC_KEY  = 'oGDWqI0y7R7zDPUST';   // EmailJS → Account → Public Key
+const EMAILJS_SERVICE_ID  = 'service_4y66egc';    // EmailJS → Email Services → Service ID
+const EMAILJS_TEMPLATE_ID = 'template_9jgv0vo';   // EmailJS → Email Templates → Template ID
 const NOTIFY_EMAIL        = 'sjowon@kakao.com'; // 알림 받을 담당자 이메일
 
 // EmailJS 초기화
@@ -1388,14 +1399,18 @@ function buildSlide3(pres, d) {
 // ────────────────────────────────────────────
 // 이메일 전송
 // ────────────────────────────────────────────
+// 반환값: true=발송 성공 / false=EmailJS 미설정으로 건너뜀 / throw=발송 실패
 async function sendEmailNotification(d) {
-  if (!EMAILJS_PUBLIC_KEY || EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') return;
+  if (typeof emailjs === 'undefined') throw new Error('EmailJS 라이브러리가 로드되지 않았습니다');
+  if (!EMAILJS_PUBLIC_KEY || EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') return false;
 
   const planStr = d.plans.map((p, i) =>
     `${i+1}. [${p.name}] 목표: ${p.goal} / 활동: ${p.actions} / 예산: ${p.budget||'없음'}원`
   ).join('\n');
 
   const params = {
+    to_email     : NOTIFY_EMAIL,   // 수신처 (템플릿 To 필드가 {{to_email}}일 때 사용)
+    email        : NOTIFY_EMAIL,   // 수신처 (템플릿 To 필드가 {{email}}일 때 사용) — 둘 다 넘겨 안전 확보
     dept_name    : d.no + ' ' + d.dept,
     leader       : d.leader + (d.subLeader ? ' / 차장: ' + d.subLeader : ''),
     submitted_at : new Date().toLocaleString('ko-KR', {timeZone:'Asia/Seoul'}),
@@ -1407,7 +1422,8 @@ async function sendEmailNotification(d) {
   };
 
   await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
-  console.log('이메일 전송 완료');
+  console.log('이메일 전송 완료 →', NOTIFY_EMAIL);
+  return true;
 }
 
 async function generatePPT() {
